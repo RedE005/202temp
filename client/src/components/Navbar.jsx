@@ -70,6 +70,8 @@ const Navbar = () => {
     return (
       <>
         <div className="flex flex-col gap-2 lg:flex-row">
+        {auth.role === "admin" && (
+          <>
           <Link
             to={"/cinema"}
             className={`flex items-center justify-center gap-2 rounded-md px-2 py-1 text-white hover:bg-gray-500 ${
@@ -81,6 +83,10 @@ const Navbar = () => {
             <HomeModernIcon className="h-6 w-6" />
             <p>Cinema</p>
           </Link>
+          </>
+        )}
+        {auth.role === "admin" && (
+          <>
           <Link
             to={"/schedule"}
             className={`flex items-center justify-center gap-2 rounded-md px-2 py-1 text-white hover:bg-gray-500 ${
@@ -92,6 +98,8 @@ const Navbar = () => {
             <ClockIcon className="h-6 w-6" />
             <p>Schedule</p>
           </Link>
+          </>
+        )}
           {auth.role && (
             <Link
               to={"/ticket"}
@@ -102,7 +110,7 @@ const Navbar = () => {
               }`}
             >
               <TicketIcon className="h-6 w-6" />
-              <p>Ticket</p>
+              <p>My Profile</p>
             </Link>
           )}
           {auth.role === "admin" && (
