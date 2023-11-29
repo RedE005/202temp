@@ -70,36 +70,36 @@ const Navbar = () => {
     return (
       <>
         <div className="flex flex-col gap-2 lg:flex-row">
-          {auth.role === "admin" && (
-            <>
-              <Link
-                to={"/cinema"}
-                className={`flex items-center justify-center gap-2 rounded-md px-2 py-1 text-white hover:bg-gray-500 ${
-                  window.location.pathname === "/cinema"
-                    ? "bg-gradient-to-br from-indigo-800 to-blue-700"
-                    : "bg-gray-600"
-                }`}
-              >
-                <HomeModernIcon className="h-6 w-6" />
-                <p>Cinema</p>
-              </Link>
-            </>
-          )}
-          {auth.role === "admin" && (
-            <>
-              <Link
-                to={"/schedule"}
-                className={`flex items-center justify-center gap-2 rounded-md px-2 py-1 text-white hover:bg-gray-500 ${
-                  window.location.pathname === "/schedule"
-                    ? "bg-gradient-to-br from-indigo-800 to-blue-700"
-                    : "bg-gray-600"
-                }`}
-              >
-                <ClockIcon className="h-6 w-6" />
-                <p>Schedule</p>
-              </Link>
-            </>
-          )}
+        {auth.role === "admin" && (
+          <>
+          <Link
+            to={"/cinema"}
+            className={`flex items-center justify-center gap-2 rounded-md px-2 py-1 text-white hover:bg-gray-500 ${
+              window.location.pathname === "/cinema"
+                ? "bg-gradient-to-br from-indigo-800 to-blue-700"
+                : "bg-gray-600"
+            }`}
+          >
+            <HomeModernIcon className="h-6 w-6" />
+            <p>Cinema</p>
+          </Link>
+          </>
+        )}
+        {auth.role === "admin" && (
+          <>
+          <Link
+            to={"/schedule"}
+            className={`flex items-center justify-center gap-2 rounded-md px-2 py-1 text-white hover:bg-gray-500 ${
+              window.location.pathname === "/schedule"
+                ? "bg-gradient-to-br from-indigo-800 to-blue-700"
+                : "bg-gray-600"
+            }`}
+          >
+            <ClockIcon className="h-6 w-6" />
+            <p>Schedule</p>
+          </Link>
+          </>
+        )}
           {auth.role && (
             <Link
               to={"/ticket"}
@@ -148,6 +148,17 @@ const Navbar = () => {
                 <UsersIcon className="h-6 w-6" />
                 <p>User</p>
               </Link>
+              <Link
+                to={"/analytics"}
+                className={`flex items-center justify-center gap-2 rounded-md px-2 py-1 text-white hover:bg-gray-500 ${
+                  window.location.pathname === "/analytics"
+                    ? "bg-gradient-to-br from-indigo-800 to-blue-700"
+                    : "bg-gray-600"
+                }`}
+              >
+                <UsersIcon className="h-6 w-6" />
+                <p>Analytics</p>
+              </Link>
             </>
           )}
         </div>
@@ -157,7 +168,7 @@ const Navbar = () => {
             className="rounded-lg bg-gradient-to-br from-red-400 to-red-400 px-2 py-1 text-white drop-shadow-md hover:from-indigo-500 hover:to-blue-400"
             onClick={openLocationModal}
           >
-            {selectedLocation ? <>{selectedLocation}</> : "📌Location"}
+           {selectedLocation ? <>{selectedLocation}</> : "📌Location"}
           </button>
           {locationModalOpen && (
             <Modal
