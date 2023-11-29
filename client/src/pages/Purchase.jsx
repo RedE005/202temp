@@ -81,7 +81,7 @@ const Purchase = () => {
               </div>
               <div className="text-right">
                 <p className="text-lg font-semibold">Tickets Price: ${selectedSeats.length * 20}</p>
-                <p>Service Fee: {membership === "Premium" ? "$0" : `$${selectedSeats.length * 1.5}`}</p>
+                <div>Service Fee{(membership === "Premium") ? "$0" : "($1.5/Ticket): $"+(selectedSeats.length * 1.5)}</div>
                 <p className="text-xl">Total: ${membership === "Premium" ? selectedSeats.length * 20 : selectedSeats.length * 21.5}</p>
               </div>
             </div>
