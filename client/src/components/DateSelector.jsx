@@ -1,4 +1,7 @@
 import { ArrowPathIcon, ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/solid'
+import { VscArrowLeft, VscArrowRight } from "react-icons/vsc";
+import { RxReset } from "react-icons/rx";
+
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import { AuthContext } from '../context/AuthContext'
 
@@ -13,6 +16,11 @@ const DateSelector = ({ selectedDate, setSelectedDate }) => {
 		setSelectedDate(prevDay)
 		sessionStorage.setItem('selectedDate', prevDay)
 	}
+	const isEditableDate = (date) => {
+		const today = new Date();
+		today.setHours(0, 0, 0, 0); // Reset hours to start of the day
+		return date > today;
+	  }
 
 	const handleNextDay = () => {
 		const nextDay = new Date(selectedDate)
@@ -49,11 +57,11 @@ const DateSelector = ({ selectedDate, setSelectedDate }) => {
 		return (
 			<button
 				title={formatDate(date)}
-				className={`flex min-w-[48px] flex-col items-center justify-center rounded p-1 font-semibold ${
+				className={`flex  min-w-[48px] flex-col items-center justify-center rounded p-1 font-semibold ${
 					isThisDate
-						? 'bg-gradient-to-br from-indigo-800 to-blue-700 text-white'
+						? 'bg-gradient-to-br from-orange-800 to-black-700 text-white'
 						: isToday
-						? 'bg-gradient-to-br from-indigo-100 to-white ring-2 ring-inset ring-indigo-800 hover:from-white hover:to-white'
+						? 'bg-gradient-to-br from-blue-100 to-white ring-2 ring-inset ring-red-800 hover:from-white hover:to-white'
 						: isPast(date)
 						? 'bg-gradient-to-br from-gray-600 to-gray-500 text-white hover:from-gray-500 hover:to-gray-400'
 						: 'bg-gradient-to-br from-indigo-100 to-white hover:from-white hover:to-white'
@@ -63,8 +71,8 @@ const DateSelector = ({ selectedDate, setSelectedDate }) => {
 					sessionStorage.setItem('selectedDate', date)
 				}}
 			>
-				<p className="text-sm">{weekday}</p>
-				<p className="text-xl">{day}</p>
+				<p className="text-l">{weekday}</p>
+				<p className="text-l"> S{day}</p>
 			</button>
 		)
 	}
@@ -74,8 +82,10 @@ const DateSelector = ({ selectedDate, setSelectedDate }) => {
 	}
 
 	const handleChange = (event) => {
-		setSelectedDate(new Date(event.target.value))
-	}
+		setSelectedDate(new Date(event.target.value+ 'T00:00')); // Create a date with the local timezone
+		setSelectedDate(localDate);
+		sessionStorage.setItem('selectedDate', localDate.toISOString());
+	  }
 
 	function generateDateRange(startDate, endDate) {
 		const dates = []
@@ -116,21 +126,21 @@ const DateSelector = ({ selectedDate, setSelectedDate }) => {
 	}
 
 	return (
-		<div className="flex flex-col gap-2">
-			<div className="relative flex items-stretch justify-between gap-2 rounded-md bg-gradient-to-br from-indigo-800 to-blue-700 p-2 font-semibold text-white">
-				{auth.role === 'admin' || !isPast(new Date().setDate(selectedDate.getDate() - 1)) ? (
+		<div className="flex items-center justify-center gap-2">
+			<div className="relative flex justify-between gap-2  bg-gradient-to-br from-yellow-800 to-yellow-800 p-8 font-bold text-white">
+				{auth.role === 'admin' || isEditableDate(selectedDate) ? (
 					<button
 						title="Go to yesterday"
-						className={'rounded hover:bg-gradient-to-br hover:from-indigo-600 hover:to-blue-600'}
+						className={' hover:bg-gradient-to-br hover:from-red-600 hover:to-red-600'}
 						onClick={handlePrevDay}
 					>
-						<ChevronLeftIcon className="h-10 w-10 text-white" />
+						<VscArrowLeft className="h-10 w-10 text-white" />
 					</button>
 				) : (
 					<div className="h-10 w-10"></div>
 				)}
-
-				{isEditing ? (
+			
+				{ (
 					<div className="w-full" ref={wrapperRef}>
 						<input
 							title="Select date"
@@ -138,45 +148,32 @@ const DateSelector = ({ selectedDate, setSelectedDate }) => {
 							min={auth.role !== 'admin' && new Date().toLocaleDateString('en-CA')}
 							required
 							autoFocus
-							className={`w-full rounded border border-white bg-gradient-to-br from-indigo-800 to-blue-700 px-1 text-center text-2xl font-semibold drop-shadow-sm sm:text-3xl`}
+							className={`w-full rounded border border-white bg-gradient-to-br from-green-800 to-yellow-700 px-5 text-center text-2xl font-semibold drop-shadow-sm sm:text-3xl`}
 							value={selectedDate.toLocaleDateString('en-CA')}
 							onChange={handleChange}
 							style={{ colorScheme: 'dark' }}
 						/>
 					</div>
-				) : (
-					<div
-						className="flex w-full items-center justify-center rounded text-center text-xl hover:bg-gradient-to-br hover:from-indigo-600 hover:to-blue-600 sm:text-2xl"
-						onClick={() => {
-							SetIsEditing(true)
-						}}
-					>
-						{formatDate(selectedDate)}
-					</div>
-				)}
+				) }
 
 				<div className="flex items-center justify-between gap-2">
 					<button
 						title="Go to tomorrow"
-						className="rounded hover:bg-gradient-to-br hover:from-indigo-600 hover:to-blue-600"
+						className=" hover:bg-gradient-to-br hover:from-red-600 hover:to-red-600"
 						onClick={handleNextDay}
 					>
-						<ChevronRightIcon className="h-10 w-10 text-white" />
+						<VscArrowRight className="h-10 w-10 text-white" />
 					</button>
 					<button
 						title="Go to today"
-						className="rounded px-1 hover:bg-gradient-to-br hover:from-indigo-600 hover:to-blue-600"
+						className=" px-1 hover:bg-gradient-to-br hover:from-red-600 hover:to-red-600"
 						onClick={handleToday}
 					>
-						<ArrowPathIcon className="h-10 w-10 text-white" />
+						<RxReset className="h-10 w-10 text-white" />
 					</button>
 				</div>
 			</div>
-			<div className="flex gap-2 overflow-auto">
-				{getPastAndNextDateRange().map((date, index) => (
-					<DateShort key={index} date={date} selectedDate={selectedDate} />
-				))}
-			</div>
+			
 		</div>
 	)
 }
