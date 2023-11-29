@@ -117,7 +117,7 @@ const Showtime = () => {
 									}}
 									className="flex items-center justify-center gap-2 rounded-b-lg bg-gradient-to-br from-indigo-600 to-blue-500 px-4 py-1 font-semibold text-white hover:from-indigo-500 hover:to-blue-500 md:rounded-none md:rounded-br-lg"
 								>
-									<p>Purchase</p>
+									<p>Book Ticket</p>
 									<TicketIcon className="h-7 w-7 text-white" />
 								</Link>
 							)}

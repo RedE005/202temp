@@ -1,6 +1,6 @@
 import { TicketIcon } from "@heroicons/react/24/solid";
 import axios from "axios";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Navbar from "../components/Navbar";
@@ -13,34 +13,33 @@ const Purchase = () => {
   const location = useLocation();
   const showtime = location.state.showtime;
   const selectedSeats = location.state.selectedSeats || [];
-  const [isPurchasing, SetIsPurchasing] = useState(false);
+  const [isPurchasing, setIsPurchasing] = useState(false);
   const [useRewardPoints, setUseRewardPoints] = useState(false);
   const [rewardPoints, setRewardPoints] = useState(0);
   const [membership, setMembership] = useState("");
 
-  const getUser = async () => {
-	try {
-	  if (!auth.token) return;
+  useEffect(() => {
+    const getUser = async () => {
+      if (!auth.token) return;
+      try {
+        const response = await axios.get("/auth/me", {
+          headers: {
+            Authorization: `Bearer ${auth.token}`,
+          },
+        });
+        setRewardPoints(response.data.data.rewardPoints);
+        setMembership(response.data.data.membership);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    getUser();
+  }, [auth.token]);
 
-	  const response = await axios.get('/auth/me', {
-		headers: {
-		  Authorization: `Bearer ${auth.token}`,
-		},
-	  });
-	  setRewardPoints(response.data.data.rewardPoints);
-	  setMembership(response.data.data.membership);
-	} catch (error) {
-	  console.error(error);
-	}
-  };
-
-  
-  getUser(); 
-
-  const onPurchase = async (data) => {
-    SetIsPurchasing(true);
+  const onPurchase = async () => {
+    setIsPurchasing(true);
     try {
-      const response = await axios.post(
+      await axios.post(
         `/showtime/${showtime._id}`,
         { seats: selectedSeats, useRewardPoints },
         {
@@ -49,87 +48,70 @@ const Purchase = () => {
           },
         }
       );
-      // console.log(response.data)
       navigate("/cinema");
-      toast.success("Purchase seats successful!", {
+      toast.success("Booking successful!", {
         position: "top-center",
         autoClose: 2000,
         pauseOnHover: false,
       });
     } catch (error) {
       console.error(error);
-      toast.error(error.response.data.message || "Error", {
+      toast.error(error.response.data.message || "Something went wrong", {
         position: "top-center",
         autoClose: 2000,
         pauseOnHover: false,
       });
     } finally {
-      SetIsPurchasing(false);
+      setIsPurchasing(false);
     }
   };
 
   return (
-    <div className="flex min-h-screen flex-col gap-4 bg-gradient-to-br from-indigo-900 to-blue-500 pb-8 sm:gap-8">
+    <div className="flex flex-col min-h-screen bg-gradient-to-br from-purple-600 via-pink-500 to-red-500">
       <Navbar />
-      <div className="mx-4 h-fit rounded-lg bg-gradient-to-br from-indigo-200 to-blue-100 p-4 drop-shadow-xl sm:mx-8 sm:p-6">
+      <div className="container mx-auto mt-4 mb-8 p-4 rounded-lg bg-white shadow-lg">
         <ShowtimeDetails showtime={showtime} />
-        <div className="flex flex-col justify-between rounded-b-lg bg-gradient-to-br from-indigo-100 to-white text-center text-lg drop-shadow-lg md:flex-row">
-          <div className="flex flex-col items-center gap-x-4 px-4 py-2 md:flex-row">
-            <p className="font-semibold">Selected Seats:</p>
-            <p className="text-start">{selectedSeats.join(", ")}</p>
-            {!!selectedSeats.length && (
-              <p className="whitespace-nowrap">
-                ({selectedSeats.length} seats)
-              </p>
-            )}
-          </div>
-          <div className="flex flex-col items-center gap-x-4 px-4 py-2 md:flex-row justify-end ml-auto">
-            <div className="flex flex-col md:flex-row gap-4">
-              <p className="font-semibold flex items-center justify-end gap-2 rounded-b-lg">
-                <label className=" items-center gap-2 rounded-b-lg px-4 py-1 bg-gradient-to-br from-blue-600 to-blue-500 font-semibold text-white md:rounded-none md:rounded-br-lg">
-                  <div>Tickets Price: ${selectedSeats.length * 20}</div>
-				  <div>Service Fee{(membership === "Premium") ? "$0" : "($1.5/Ticket): $"+(selectedSeats.length * 1.5)}</div>
-				  <div>Total: ${(membership === "Premium") ? (selectedSeats.length * 20) : (selectedSeats.length * 21.5)}</div>
-                </label>
-				
-              </p>
+        {/* ... */}
+        {selectedSeats.length > 0 && (
+          <div className="mt-4 flex flex-col gap-4 p-4 rounded-lg bg-white shadow-lg">
+            <div className="flex justify-between items-center">
+              <div>
+                <p className="text-lg font-semibold">Selected Seats: {selectedSeats.join(", ")}</p>
+                <p className="text-md">({selectedSeats.length} seats)</p>
+              </div>
+              <div className="text-right">
+                <p className="text-lg font-semibold">Tickets Price: ${selectedSeats.length * 20}</p>
+                <p>Service Fee: {membership === "Premium" ? "$0" : `$${selectedSeats.length * 1.5}`}</p>
+                <p className="text-xl">Total: ${membership === "Premium" ? selectedSeats.length * 20 : selectedSeats.length * 21.5}</p>
+              </div>
             </div>
-          </div>
-        </div>
-
-        <div className="flex flex-col items-center gap-x-4 px-4 py-2 md:flex-row justify-end">
-          {selectedSeats.length > 0 && (
-            <div className="flex flex-col md:flex-row gap-4">
-              <label className="flex items-center gap-2 rounded-b-lg px-4 py-1 bg-gradient-to-br from-red-600 to-red-500 font-semibold text-white hover:from-indigo-500 hover:to-blue-500 disabled:from-slate-500 disabled:to-slate-400 md:rounded-none md:rounded-br-lg">
+            <div className="flex justify-between items-center">
+              <label className="flex items-center gap-2">
                 <input
                   type="checkbox"
                   checked={useRewardPoints}
                   onChange={() => setUseRewardPoints(!useRewardPoints)}
+                  className="w-4 h-4 accent-pink-500"
                   disabled={isPurchasing}
                 />
-                <div>
-                  {useRewardPoints
-                    ? "Cancel Reward Points"
-                    : "Use Reward Points? Remaining points: $"+rewardPoints}
-                </div>
+                <span className="text-lg font-semibold">
+                  Use Reward Points?
+                </span>
+                <span className="font-medium">
+                  Remaining points: ${rewardPoints.toFixed(2)}
+                </span>
               </label>
-            </div>
-          )}
-        </div>
-        <div className="flex flex-col items-center gap-x-4 px-4 py-2 md:flex-row justify-end">
-          {selectedSeats.length > 0 && (
-            <div className="flex flex-col md:flex-row gap-4">
               <button
-                onClick={() => onPurchase()}
-                className="flex items-center justify-center gap-2 rounded-b-lg  bg-gradient-to-br from-indigo-600 to-blue-500 px-4 py-1 font-semibold text-white hover:from-indigo-500 hover:to-blue-500 disabled:from-slate-500 disabled:to-slate-400 md:rounded-none md:rounded-br-lg"
+                onClick={onPurchase}
+                className={`px-6 py-2 rounded-md font-semibold flex items-center gap-2 transition duration-300 ease-in-out ${isPurchasing ? 'bg-gray-400' : 'bg-indigo-700 hover:bg-indigo-600 text-white'} `}
                 disabled={isPurchasing}
               >
-                {isPurchasing ? "Processing..." : "Confirm Purchase"}
-                <TicketIcon className="h-7 w-7 text-white" />
+                {isPurchasing ? "Processing..." : "Confirm Booking"}
+                <TicketIcon className="h-6 w-6" />
               </button>
             </div>
-          )}
-        </div>
+          </div>
+        )}
       </div>
     </div>
   );

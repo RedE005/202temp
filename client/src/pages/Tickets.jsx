@@ -27,9 +27,9 @@ const Tickets = () => {
           return -1;
         })
       );
-	  console.log(response.data);
-	  setRewardPoints(response.data.data.rewardPoints);
-	  setMembership(response.data.data.membership);
+      console.log(response.data);
+      setRewardPoints(response.data.data.rewardPoints);
+      setMembership(response.data.data.membership);
     } catch (error) {
       console.error(error);
     } finally {
@@ -45,14 +45,18 @@ const Tickets = () => {
     <div className="flex min-h-screen flex-col gap-4 bg-gradient-to-br from-indigo-900 to-blue-500 pb-8 text-gray-900 sm:gap-8">
       <Navbar />
       <div className="mx-4 flex h-fit flex-col gap-4 rounded-md bg-gradient-to-br from-indigo-200 to-blue-100 p-4 drop-shadow-xl sm:mx-8 sm:p-6">
-	  <div className="mx-4 flex h-fit flex-row gap-4 from-indigo-200 to-blue-100 p-4 drop-shadow-xl sm:mx-1 sm:p-2">
-	  <div className="flex items-center  border-2 border-indigo-900 rounded-md w-1/2 mb-4 ">
-	  <h2 className="text-3xl font-bold text-gray-900 py-9 px-4">Membership Type: {membership}</h2>
-      </div>
-	  <div className="flex items-center  border-2 border-indigo-900 rounded-md w-1/2 mb-4 ">
-        <h2 className="text-3xl font-bold text-gray-900 py-9 px-4">Reward Points: {rewardPoints}</h2>
-      </div>
-	  </div>
+        <div className="mx-4 flex h-fit flex-row gap-4 from-indigo-200 to-blue-100 p-4 drop-shadow-xl sm:mx-1 sm:p-2">
+          <div className="flex items-center  border-2 border-indigo-900 rounded-md w-1/2 mb-4 ">
+            <h2 className="text-3xl font-bold text-gray-900 py-9 px-4">
+              Membership Type: {membership}
+            </h2>
+          </div>
+          <div className="flex items-center  border-2 border-indigo-900 rounded-md w-1/2 mb-4 ">
+            <h2 className="text-3xl font-bold text-gray-900 py-9 px-4">
+              Reward Points: {rewardPoints}
+            </h2>
+          </div>
+        </div>
         <h2 className="text-3xl font-bold text-gray-900">My Tickets</h2>
         {isFetchingticketsDone ? (
           <>

@@ -1,69 +1,70 @@
+import React from "react";
+import Loading from "../components/Loading";
+import { ArrowLeftIcon } from "@heroicons/react/24/solid";
+import { useNavigate } from "react-router-dom"; // assuming you are using react-router for navigation
 import "react-toastify/dist/ReactToastify.css";
 
 const SelectedMovie = ({
   movies,
   selectedMovieIndex,
   setSelectedMovieIndex,
-  auth,
   isFetchingMoviesDone,
 }) => {
+  const navigate = useNavigate();
+
+  const handleBack = () => {
+    setSelectedMovieIndex(null);
+    sessionStorage.setItem("selectedMovieIndex", null);
+    navigate('/'); // Navigate back to the previous page
+  };
+
+  if (!isFetchingMoviesDone) {
+    return <Loading />;
+  }
+
+  if (!movies.length || selectedMovieIndex === null) {
+    return (
+      <div className="text-center text-xl text-white py-12">
+        There are no movies available
+      </div>
+    );
+  }
+
+  const movie = movies[selectedMovieIndex];
+
   return (
-    <div className="mx-4 flex flex-col rounded-md bg-gradient-to-br from-indigo-200 to-blue-100 p-4 text-gray-900 drop-shadow-md sm:mx-8 sm:p-6">
-      <h2 className="text-3xl font-bold">Selected Movie</h2>
-      <button
-        className="my-3 bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded focus:outline-none focus:shadow-outline self-start"
-        onClick={() => {
-          setSelectedMovieIndex(null);
-          sessionStorage.setItem("selectedMovieIndex", null);
-        }}
-      >
-        &larr; Back
-      </button>
-      {isFetchingMoviesDone ? (
-        movies.length ? (
-          <div className="mt-1 overflow-x-auto sm:mt-3">
-            <div className="mx-2 my-3 flex w-fit gap-4">
-              {movies?.map((movie, index) => {
-                if (movies[selectedMovieIndex]?._id === movie._id) {
-                  return (
-                    <div
-                      key={index}
-                      title={movie.name}
-                      className="flex w-[108px] flex-col rounded-md bg-gradient-to-br from-indigo-600 to-blue-500 p-1 text-white drop-shadow-md hover:from-indigo-500 hover:to-blue-400 sm:w-[144px]"
-                      onClick={() => {
-                        setSelectedMovieIndex(null);
-                        sessionStorage.setItem("selectedMovieIndex", null);
-                      }}
-                    >
-                      <img
-                        src={movie.img}
-                        className="h-36 rounded-md object-cover drop-shadow-md sm:h-48"
-                      />
-                      <p className="truncate pt-1 text-center text-sm font-semibold leading-4">
-                        {movie.name}
-                      </p>
-                    </div>
-                  );
-                }
-              })}
-              <div className="flex flex-col sm:flex-row gap-4 p-4 bg-red-200 rounded-md">
-                <div className="flex-1 w-full">
-                  <h3 className="text-xl font-bold mb-2">
-                    {movies[selectedMovieIndex]?.name}
-                  </h3>
-                  <p className="text-gray-700 my-1"><b>Movie duration:</b> {movies[selectedMovieIndex]?.length} minutes</p>
-                  <p className="text-gray-700 my-5"><b>Genre:</b> Action, Thriller</p>
-                </div>
-              </div>
-            </div>
+    <div className="bg-gradient-to-br from-indigo-900 to-red-500 py-4 px-4 sm:px-6 lg:px-8">
+      <div className="container mx-auto max-w-4xl">
+        <div className="mb-2">
+          <button
+            onClick={handleBack}
+            className="flex items-center gap-2 text-white"
+          >
+            <ArrowLeftIcon className="h-5 w-5" />
+            Back
+          </button>
+        </div>
+        <div className="rounded-lg shadow-lg overflow-hidden md:flex bg-white">
+          <div className="md:flex-shrink-0">
+            <img
+              src={movie.img}
+              alt={movie.name}
+              className="h-200 w-full object-cover md:h-full md:w-60" // Adjusted to have a fixed height and width
+            />
           </div>
-        ) : (
-          <p className="mt-4 text-center">There are no movies available</p>
-        )
-      ) : (
-        <Loading />
-      )}
+          <div className="p-4">
+            <h3 className="text-2xl font-bold">{movie.name}</h3>
+            <p className="text-lg">
+              <strong>Movie duration:</strong> {movie.length} minutes
+            </p>
+            <p className="text-lg">
+              <strong>Genre:</strong> {movie.genre || "N/A"}
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
+
 export default SelectedMovie;
