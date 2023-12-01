@@ -40,7 +40,8 @@ const Purchase = () => {
       setRewardPoints(response.data.data.rewardPoints);
       setMembership(response.data.data.membership);
       if (day === "Tuesday" || isBefore6pm) {
-        setTicketPrice(15);
+        console.log("Tuesday or before 6pm")
+        setTicketPrice(ticketPrice-5);
       }
       //console.log(day);
     } catch (error) {
@@ -62,8 +63,8 @@ const Purchase = () => {
   };
 
   useEffect(() => {
+    getTicketPrice();    
     getUser();
-    getTicketPrice();
   }, [auth.token]);
 
   const onPurchase = async () => {
