@@ -197,7 +197,7 @@ exports.addShowtime = async (req, res, next) => {
 
 exports.purchase = async (req, res, next) => {
   try {
-    const { seats, useRewardPoints } = req.body;
+    const { seats, useRewardPoints, ticketPrice } = req.body;
     const user = req.user;
     const isPremiumUser = user.membership === "Premium";
 
@@ -245,8 +245,8 @@ exports.purchase = async (req, res, next) => {
     }
 
     const purchaseAmount = isPremiumUser
-      ? seats.length * SEAT_PRICE
-      : seats.length * (SEAT_PRICE + SERVICE_FEE);
+      ? seats.length * ticketPrice
+      : seats.length * (ticketPrice + SERVICE_FEE);
     let rewardPointsEarned;
 
     if (useRewardPoints) {
@@ -272,7 +272,7 @@ exports.purchase = async (req, res, next) => {
     }
     //await user.save()
     //console.log('reward points',rewardPointsRequired)
-    //console.log('rewardPointsEarned',rewardPointsEarned)
+    console.log("rewardPointsEarned", rewardPointsEarned);
     const seatUpdates = seats.map((seatNumber) => {
       const [row, number] = seatNumber.match(/([A-Za-z]+)(\d+)/).slice(1);
       return { row, number: parseInt(number, 10), user: user._id };
@@ -392,5 +392,81 @@ exports.deletePreviousShowtime = async (req, res, next) => {
   } catch (err) {
     console.log(err);
     res.status(400).json({ success: false, message: err });
+  }
+};
+
+//@desc     Delete ticket
+//@route    DELETE /showtime/deleteTicket/:id
+//@access   Public
+
+exports.deleteTicket = async (req, res, next) => {
+  try {
+    const ticket = req.body.ticket;
+    const userId = req.body.userId;
+    const showtime = await Showtime.findById(ticket.showtime._id);
+    const user = await User.findById(userId);
+    const seatsToBeCancelled = ticket.seats;
+    const isPremiumUser = user.membership === "Premium";
+    const userTickets = user.tickets;
+
+    const rewardPointsToBeDeducted = isPremiumUser
+      ? seatsToBeCancelled.length * SEAT_PRICE
+      : seatsToBeCancelled.length * (SEAT_PRICE + SERVICE_FEE);
+
+    showtime.seats = showtime.seats.filter((showtimeSeat) => {
+      return !seatsToBeCancelled.some((cancelledSeat) => {
+        return (
+          cancelledSeat.row === showtimeSeat.row &&
+          cancelledSeat.number === showtimeSeat.number
+        );
+      });
+    }); 
+    /* const temp = [];
+    for (let i = 0; i < userTickets.length; i++) {
+          if(userTickets[i].showtime !== showtime &&
+          userTickets[i].seats[0].row !== seatsToBeCancelled[0].row &&
+          userTickets[i].seats[0].number !== seatsToBeCancelled[0].number){
+          temp.push(userTickets[i]);}
+    } */
+
+    const ticketUpdates = [];
+    for (let i = 0; i < userTickets.length; i++) {
+      let shouldPush = true;
+      if (userTickets[i].showtime !== showtime) {
+        for (let j = 0; j < userTickets[i].seats.length; j++) {
+          for (let k = 0; k < seatsToBeCancelled.length; k++) {
+            if (
+              userTickets[i].seats[j].row === seatsToBeCancelled[k].row &&
+              userTickets[i].seats[j].number === seatsToBeCancelled[k].number
+            ) {
+              shouldPush = false;
+              break;
+            }
+          }
+          if (!shouldPush) break;
+        }
+      }
+      if (shouldPush) ticketUpdates.push(userTickets[i]);
+    }
+
+    
+    const updatedShowtime = await showtime.save();
+
+     const updatedUser = await User.findByIdAndUpdate(
+      userId,
+      {
+        $set: { tickets: ticketUpdates },
+        $inc: { rewardPoints: -rewardPointsToBeDeducted }
+      },
+      { new: true }
+    );
+    //$pull: { tickets: { _id: ticket._id } },
+
+   // res.send(updatedUser);
+    //res.status(200).json({ success: true, data: updatedShowtime });
+    res.status(200).json({ success: true, data: updatedShowtime, updatedUser, rewardPointsToBeDeducted});
+  } catch (err) {
+    console.log(err);
+    res.status(400).json({ success: false, message: err.message });
   }
 };

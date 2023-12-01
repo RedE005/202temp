@@ -13,7 +13,8 @@ const {
     deleteShowtimes,
     getShowtimeWithUser,
     getUnreleasedShowtimes,
-    updateShowtime
+    updateShowtime,
+    deleteTicket
 } = require('../controllers/showtimeController');
 
 router.get('/occupancy', protect, authorize('admin'), async (req, res) => {
@@ -43,12 +44,10 @@ router.get('/occupancy', protect, authorize('admin'), async (req, res) => {
     }
 });
 
+router.route('/deleteTicket/:id').delete(protect,deleteTicket);
 router.route('/unreleased').get(protect, authorize('admin'), getUnreleasedShowtimes);
 router.route('/previous').delete(protect, authorize('admin'), deletePreviousShowtime);
 router.route('/user/:id').get(protect, authorize('admin'), getShowtimeWithUser);
-router.route('/unreleased').get(protect, authorize('admin'), getUnreleasedShowtimes)
-router.route('/previous').delete(protect, authorize('admin'), deletePreviousShowtime)
-router.route('/user/:id').get(protect, authorize('admin'), getShowtimeWithUser)
 
 router.route('/')
     .get(getShowtimes)

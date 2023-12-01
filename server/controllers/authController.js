@@ -1,4 +1,5 @@
 const User = require("../models/User");
+const TicketPrice = require("../models/TicketPrice");
 
 //@desc    Register user
 //@route   POST /auth/register
@@ -210,5 +211,32 @@ exports.updateUser = async (req, res, next) => {
     res.status(200).json({ success: true, data: user });
   } catch (err) {
     res.status(400).json({ success: false, message: err });
+  }
+};
+
+exports.getTicketPrice = async (req, res, next) => {
+  try {
+    const ticketPrice = await TicketPrice.findOne();
+    res.status(200).json({ success: true, data: ticketPrice });
+  } catch (err) {
+    res.status(400).json({ success: false, message: err });
+  }
+};
+
+exports.updateTicketPrice = async (req, res, next) => {
+  try {
+    const { ticketId, ticketPrice } = req.body;
+
+    // Find the ticket by ID and update the ticketPrice
+    const updatedTicket = await TicketPrice.findByIdAndUpdate(
+      ticketId,
+      { ticketPrice },
+      { new: true } // Return the updated document
+    );
+
+    res.json(updatedTicket);
+  }catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
   }
 };

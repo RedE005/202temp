@@ -1,7 +1,7 @@
 import React from "react";
 import Loading from "../components/Loading";
 import { ArrowLeftIcon } from "@heroicons/react/24/solid";
-import { useNavigate } from "react-router-dom"; // assuming you are using react-router for navigation
+import { useNavigate } from "react-router-dom"; 
 import "react-toastify/dist/ReactToastify.css";
 
 const SelectedMovie = ({
@@ -15,7 +15,7 @@ const SelectedMovie = ({
   const handleBack = () => {
     setSelectedMovieIndex(null);
     sessionStorage.setItem("selectedMovieIndex", null);
-    navigate('/'); // Navigate back to the previous page
+    navigate('/');
   };
 
   if (!isFetchingMoviesDone) {
@@ -49,7 +49,7 @@ const SelectedMovie = ({
             <img
               src={movie.img}
               alt={movie.name}
-              className="h-200 w-full object-cover md:h-full md:w-60" // Adjusted to have a fixed height and width
+              className="h-200 w-full object-cover md:h-full md:w-60" 
             />
           </div>
           <div className="p-4">
@@ -58,7 +58,7 @@ const SelectedMovie = ({
               <strong>Movie duration:</strong> {movie.length} minutes
             </p>
             <p className="text-lg">
-              <strong>Genre:</strong> {movie.genre || "N/A"}
+              <strong>Genre:</strong> {movie.genre || "Action, Thriller"}
             </p>
           </div>
         </div>
