@@ -112,38 +112,41 @@ const User = () => {
 	}
 
 	return (
-		<div className="flex min-h-screen flex-col gap-4 bg-gradient-to-br from-indigo-900 to-blue-500 pb-8 text-gray-900 sm:gap-8">
+		<div className="flex min-h-screen flex-col gap-4 bg-gradient-to-br from-indigo-900 to-red-500 pb-8 text-gray-700 sm:gap-8">
 			<Navbar />
-			<div className="mx-4 flex h-fit flex-col gap-2 rounded-lg bg-gradient-to-br from-indigo-200 to-blue-100 p-4 drop-shadow-xl sm:mx-8 sm:p-6">
-				<h2 className="text-3xl font-bold text-gray-900">Users</h2>
+			<div className="mx-4 flex h-fit flex-col gap-4 rounded-lg bg-gradient-to-br from-purple-900 to-blue-100 p-6 drop-shadow-2xl sm:mx-8 sm:p-6">
+				
+				<h2 className="text-6xl font-bold text-gray-900">Users</h2>
 				<div className="relative drop-shadow-sm">
 					<div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-						<MagnifyingGlassIcon className="h-5 w-5 stroke-2 text-gray-500" />
+						<MagnifyingGlassIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 h-6 w-6 text-black" />
+          <input />
 					</div>
 					<input
 						type="search"
-						className="block w-full rounded-lg border border-gray-300 p-2 pl-10 text-gray-900"
+						className="block w-full rounded-lg border boder-transparent bg-blue/20 p-2 pl-12 text-lg text-white placeholder-gray-300 focus:ring-purple-300 focus:border-purple-300"
 						placeholder="Search username"
 						{...register('search')}
 					/>
 				</div>
 				<div
-					className={`mt-2 grid max-h-[60vh] overflow-auto rounded-md bg-gradient-to-br from-indigo-100 to-white`}
+					className={`mt-2 grid max-h-[60vh] overflow-auto rounded-md bg-gradient-to-br from-indigo-200 to-red`}
 					style={{ gridTemplateColumns: 'repeat(3, minmax(max-content, 1fr)) max-content max-content' }}
 				>
-					<p className="sticky top-0 bg-gradient-to-br from-gray-800 to-gray-700 px-2 py-1 text-center text-xl font-semibold text-white">
+					<p className="sticky top-0 bg-gradient-to-br from-gray-800 to-gray-700 px-2 py-1 text-center text-2xl font-semibold text-white">
 						Username
 					</p>
-					<p className="sticky top-0 bg-gradient-to-br from-gray-800 to-gray-700 px-2 py-1 text-center text-xl font-semibold text-white">
+					<p className="sticky top-0 bg-gradient-to-br from-gray-800 to-gray-700 px-2 py-1 text-center text-2xl font-semibold text-white">
 						Email
 					</p>
-					<p className="sticky top-0 bg-gradient-to-br from-gray-800 to-gray-700 px-2 py-1 text-center text-xl font-semibold text-white">
+					
+					<p className="sticky top-0 bg-gradient-to-br from-gray-800 to-gray-700 px-2 py-1 text-center text-2xl font-bold text-white">
 						Role
 					</p>
-					<p className="sticky top-0 bg-gradient-to-br from-gray-800 to-gray-700 px-2 py-1 text-center text-xl font-semibold text-white">
+					<p className="sticky top-0 bg-gradient-to-br from-gray-800 to-gray-700 px-2 py-1 text-center text-2xl font-bold text-white">
 						Ticket
 					</p>
-					<p className="sticky top-0 bg-gradient-to-br from-gray-800 to-gray-700 px-2 py-1 text-center text-xl font-semibold text-white">
+					<p className="sticky top-0 bg-gradient-to-br from-gray-800 to-gray-700 px-2 py-1 text-center text-2xl font-bold text-white">
 						Action
 					</p>
 					{users
@@ -167,7 +170,7 @@ const User = () => {
 												setTicketsUser(user.username)
 											}}
 										>
-											View {user.tickets.length} Tickets
+											 {user.tickets.length}o
 											<TicketIcon className="h-6 w-6" />
 										</button>
 									</div>
@@ -193,12 +196,12 @@ const User = () => {
 											</button>
 										)}
 										<button
-											className="flex w-[115px] items-center justify-center gap-1 rounded bg-gradient-to-r from-red-700 to-rose-600 py-1 pl-2 pr-1.5 text-sm font-medium text-white hover:from-red-600 hover:to-rose-500 disabled:from-slate-500 disabled:to-slate-400"
+											className="flex w-[75px] items-center justify-center gap-1 rounded bg-gradient-to-r from-red-700 to-rose-600 py-1 pl-2 pr-1.5 text-sm font-medium text-white hover:from-red-600 hover:to-rose-500 disabled:from-slate-500 disabled:to-slate-400"
 											onClick={() => handleDelete({ id: user._id, username: user.username })}
 											disabled={isDeleting}
 										>
-											DELETE
-											<TrashIcon className="h-5 w-5" />
+											
+											<TrashIcon className="h-6 w-6" />
 										</button>
 									</div>
 								</Fragment>

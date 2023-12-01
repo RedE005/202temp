@@ -94,13 +94,13 @@ const Showtime = () => {
 	})
 
 	return (
-		<div className="flex min-h-screen flex-col gap-4 bg-gradient-to-br from-indigo-900 to-blue-500 pb-8 sm:gap-8">
+		<div className="flex min-h-screen flex-col gap-4 bg-gradient-to-br from-red-900 to-blue-500 pb-8 sm:gap-8">
 			<Navbar />
-			<div className="mx-4 h-fit rounded-lg bg-gradient-to-br from-indigo-200 to-blue-100 p-4 drop-shadow-xl sm:mx-8 sm:p-6">
+			<div className="mx-4 h-fit rounded-lg bg-gradient-to-br from-blue-200 to-blue-100 p-4 drop-shadow-xl sm:mx-8 sm:p-6">
 				{showtime.showtime ? (
 					<>
 						<ShowtimeDetails showtime={showtime} showDeleteBtn={true} fetchShowtime={fetchShowtime} />
-						<div className="flex flex-col justify-between rounded-b-lg bg-gradient-to-br from-indigo-100 to-white text-center text-lg drop-shadow-lg md:flex-row">
+						<div className="flex flex-col justify-between rounded-b-lg bg-gradient-to-br from-purple-900 to-purple text-center text-lg drop-shadow-lg md:flex-row">
 							<div className="flex flex-col items-center gap-x-4 px-4 py-2 md:flex-row">
 								{!isPast && <p className="font-semibold">Selected Seats : </p>}
 								<p className="text-start">{sortedSelectedSeat.join(', ')}</p>
@@ -123,9 +123,9 @@ const Showtime = () => {
 							)}
 						</div>
 
-						<div className="mx-auto mt-4 flex flex-col items-center rounded-lg bg-gradient-to-br from-indigo-100 to-white p-4 text-center drop-shadow-lg">
-							<div className="w-full rounded-lg bg-white">
-								<div className="bg-gradient-to-r from-indigo-800 to-blue-700 bg-clip-text text-xl font-bold text-transparent">
+						<div className="mx-auto mt-4 flex flex-col items-center rounded-lg bg-gradient-to-br from-white-900 to-white p-4 text-center drop-shadow-lg">
+							<div className="w-full rounded-lg bg-black">
+								<div className="bg-gradient-to-r from-white-800 to-white-700 bg-clip-text text-xl font-bold text-transparent">
 									Screen
 								</div>
 							</div>
@@ -181,10 +181,10 @@ const Showtime = () => {
 						</div>
 						{auth.role === 'admin' && (
 							<>
-								<h2 className="mt-4 text-2xl font-bold">Booked Seats</h2>
-								<div className="mt-2 flex gap-2 rounded-md bg-gradient-to-br from-indigo-100 to-white p-4">
+								<h2 className="mt-4 text-2xl font-bold text-purple-800">Booked Seats</h2>
+								<div className="mt-2 flex gap-2 rounded-md bg-gradient-to-br from-white-300 to-purple p-4">
 									<div className="flex grow flex-col">
-										<h4 className="text-lg font-bold text-gray-800">Row</h4>
+										<h4 className="text-lg font-bold text-purple-800">Row</h4>
 										<Select
 											value={filterRow}
 											options={Array.from(new Set(showtime?.seats.map((seat) => seat.row)))
@@ -216,7 +216,7 @@ const Showtime = () => {
 										/>
 									</div>
 									<div className="flex grow flex-col">
-										<h4 className="text-lg font-bold text-gray-800">Number</h4>
+										<h4 className="text-lg font-bold text-purple-800">Number</h4>
 										<Select
 											value={filterColumn}
 											options={Array.from(new Set(showtime?.seats.map((seat) => seat.number)))
@@ -240,7 +240,7 @@ const Showtime = () => {
 								<div
 									className={`mt-4 grid max-h-screen w-full overflow-auto rounded-md bg-gradient-to-br from-indigo-100 to-white`}
 									style={{
-										gridTemplateColumns: 'repeat(4, minmax(max-content, 1fr))'
+										gridTemplateColumns: 'repeat(3, minmax(max-content, 1fr))'
 									}}
 								>
 									<p className="sticky top-0 bg-gradient-to-br from-gray-800 to-gray-700 px-2 py-1 text-center text-xl font-semibold text-white">
@@ -252,9 +252,7 @@ const Showtime = () => {
 									<p className="sticky top-0 bg-gradient-to-br from-gray-800 to-gray-700 px-2 py-1 text-center text-xl font-semibold text-white">
 										Email
 									</p>
-									<p className="sticky top-0 bg-gradient-to-br from-gray-800 to-gray-700 px-2 py-1 text-center text-xl font-semibold text-white">
-										Role
-									</p>
+									
 									{filteredSeats
 										.sort((a, b) => {
 											const rowA = a.row
