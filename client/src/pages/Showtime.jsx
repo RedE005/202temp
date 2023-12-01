@@ -9,6 +9,7 @@ import Navbar from '../components/Navbar'
 import Seat from '../components/Seat'
 import ShowtimeDetails from '../components/ShowtimeDetails'
 import { AuthContext } from '../context/AuthContext'
+import { GiTicket } from "react-icons/gi";
 
 const Showtime = () => {
 	const { auth } = useContext(AuthContext)
@@ -94,15 +95,15 @@ const Showtime = () => {
 	})
 
 	return (
-		<div className="flex min-h-screen flex-col gap-4 bg-gradient-to-br from-red-900 to-blue-500 pb-8 sm:gap-8">
+		<div className="flex min-h-screen flex-col gap-4 bg-gradient-to-br from-indigo-900 to-red-500 pb-8 sm:gap-8">
 			<Navbar />
-			<div className="mx-4 h-fit rounded-lg bg-gradient-to-br from-blue-200 to-blue-100 p-4 drop-shadow-xl sm:mx-8 sm:p-6">
+			<div className="mx-4 h-fit  bg-gradient-to-br from-indigo-200 to-blue-100 p-4 drop-shadow-xl sm:mx-8 sm:p-6">
 				{showtime.showtime ? (
 					<>
 						<ShowtimeDetails showtime={showtime} showDeleteBtn={true} fetchShowtime={fetchShowtime} />
-						<div className="flex flex-col justify-between rounded-b-lg bg-gradient-to-br from-purple-900 to-purple text-center text-lg drop-shadow-lg md:flex-row">
+						<div className="flex flex-col justify-between  bg-gradient-to-br from-indigo-100 to-indigo-100 text-center text-lg drop-shadow-lg md:flex-row">
 							<div className="flex flex-col items-center gap-x-4 px-4 py-2 md:flex-row">
-								{!isPast && <p className="font-semibold">Selected Seats : </p>}
+								{!isPast && <p className="font-bold">Selected Seats : </p>}
 								<p className="text-start">{sortedSelectedSeat.join(', ')}</p>
 								{!!selectedSeats.length && (
 									<p className="whitespace-nowrap">({selectedSeats.length} seats)</p>
@@ -115,31 +116,27 @@ const Showtime = () => {
 										selectedSeats: sortedSelectedSeat,
 										showtime
 									}}
-									className="flex items-center justify-center gap-2 rounded-b-lg bg-gradient-to-br from-indigo-600 to-blue-500 px-4 py-1 font-semibold text-white hover:from-indigo-500 hover:to-blue-500 md:rounded-none md:rounded-br-lg"
+									className="flex items-center justify-center gap-2  bg-gradient-to-br from-red-600 to-blue-500 px-4 py-1 font-semibold text-white hover:from-indigo-500 hover:to-green-500 "
 								>
 									<p>Book Ticket</p>
-									<TicketIcon className="h-7 w-7 text-white" />
+									<GiTicket  className="h-7 w-7 text-white" />
 								</Link>
 							)}
 						</div>
 
-						<div className="mx-auto mt-4 flex flex-col items-center rounded-lg bg-gradient-to-br from-white-900 to-white p-4 text-center drop-shadow-lg">
-							<div className="w-full rounded-lg bg-black">
-								<div className="bg-gradient-to-r from-white-800 to-white-700 bg-clip-text text-xl font-bold text-transparent">
-									Screen
-								</div>
-							</div>
+						<div className="mx-auto mt-4 flex flex-col items-center  bg-gradient-to-br from-indigo-100 to-red p-4 text-center drop-shadow-lg">
+							
 							<div className="flex w-full flex-col overflow-x-auto overflow-y-hidden">
 								<div className="m-auto my-2">
 									<div className="flex flex-col">
-										<div className="flex items-center">
-											<div className="flex h-8 w-8 items-center">
+										<div className="flex ">
+											<div className="flex h-8 w-8 items-center justify-center">
 												<p className="w-8"></p>
 											</div>
 											{colNumber.map((col, index) => {
 												return (
-													<div key={index} className="flex h-8 w-8 items-center">
-														<p className="w-8 font-semibold">{col}</p>
+													<div key={index} className="flex h-8 w-8 items-center justify-center m-3">
+														<p className="w-8 text-xl font-bold">{col}</p>
 													</div>
 												)
 											})}
@@ -147,7 +144,7 @@ const Showtime = () => {
 										{rowLetters.reverse().map((rowLetter, index) => {
 											return (
 												<div key={index} className="flex">
-													<div className="flex h-8 w-8 items-center">
+													<div className="flex h-8 w-8 items-center my-3">
 														<p className="w-8 text-xl font-semibold">{rowLetter}</p>
 													</div>
 													{colNumber.map((col, index) => {
@@ -169,7 +166,7 @@ const Showtime = () => {
 															/>
 														)
 													})}
-													<div className="flex h-8 w-8 items-center">
+													<div className="flex h-8 w-8 items-center my-3">
 														<p className="w-8 text-xl font-semibold">{rowLetter}</p>
 													</div>
 												</div>
@@ -178,13 +175,20 @@ const Showtime = () => {
 									</div>
 								</div>
 							</div>
+							<div className="w-3/4  bg-white">
+								<div className="bg-gradient-to-r from-red-800 to-red-700 bg-clip-text text-xl font-bold text-transparent">
+									Screen
+								</div>
+							</div>
+
+
 						</div>
 						{auth.role === 'admin' && (
 							<>
-								<h2 className="mt-4 text-2xl font-bold text-purple-800">Booked Seats</h2>
-								<div className="mt-2 flex gap-2 rounded-md bg-gradient-to-br from-white-300 to-purple p-4">
+								<h2 className="mt-4 text-2xl font-bold">Booked Seats</h2>
+								<div className="mt-2 flex gap-2  bg-gradient-to-br from-indigo-100 to-indigo-100 p-4">
 									<div className="flex grow flex-col">
-										<h4 className="text-lg font-bold text-purple-800">Row</h4>
+										<h4 className="text-lg font-bold text-gray-800">Row</h4>
 										<Select
 											value={filterRow}
 											options={Array.from(new Set(showtime?.seats.map((seat) => seat.row)))
@@ -216,7 +220,7 @@ const Showtime = () => {
 										/>
 									</div>
 									<div className="flex grow flex-col">
-										<h4 className="text-lg font-bold text-purple-800">Number</h4>
+										<h4 className="text-lg font-bold text-gray-800">Number</h4>
 										<Select
 											value={filterColumn}
 											options={Array.from(new Set(showtime?.seats.map((seat) => seat.number)))
@@ -238,21 +242,23 @@ const Showtime = () => {
 									</div>
 								</div>
 								<div
-									className={`mt-4 grid max-h-screen w-full overflow-auto rounded-md bg-gradient-to-br from-indigo-100 to-white`}
+									className={`mt-4 grid max-h-screen w-full overflow-auto  bg-gradient-to-br from-indigo-100 to-white`}
 									style={{
-										gridTemplateColumns: 'repeat(3, minmax(max-content, 1fr))'
+										gridTemplateColumns: 'repeat(4, minmax(max-content, 1fr))'
 									}}
 								>
-									<p className="sticky top-0 bg-gradient-to-br from-gray-800 to-gray-700 px-2 py-1 text-left text-xl font-semibold text-white">
+									<p className="sticky top-0 bg-gradient-to-br from-gray-800 to-gray-700 px-2 py-1 text-center text-xl font-semibold text-white">
 										Seat
 									</p>
-									<p className="sticky top-0 bg-gradient-to-br from-gray-800 to-gray-700 px-2 py-1 text-left text-xl font-semibold text-white">
+									<p className="sticky top-0 bg-gradient-to-br from-gray-800 to-gray-700 px-2 py-1 text-center text-xl font-semibold text-white">
 										Username
 									</p>
-									<p className="sticky top-0 bg-gradient-to-br from-gray-800 to-gray-700 px-2 py-1 text-left text-xl font-semibold text-white">
+									<p className="sticky top-0 bg-gradient-to-br from-gray-800 to-gray-700 px-2 py-1 text-center text-xl font-semibold text-white">
 										Email
 									</p>
-									
+									<p className="sticky top-0 bg-gradient-to-br from-gray-800 to-gray-700 px-2 py-1 text-center text-xl font-semibold text-white">
+										Role
+									</p>
 									{filteredSeats
 										.sort((a, b) => {
 											const rowA = a.row
@@ -286,7 +292,9 @@ const Showtime = () => {
 													<div className="border-t-2 border-indigo-200 px-2 py-1">
 														{seat.user.email}
 													</div>
-													
+													<div className="border-t-2 border-indigo-200 px-2 py-1">
+														{seat.user.role}
+													</div>
 												</Fragment>
 											)
 										})}

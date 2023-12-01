@@ -120,9 +120,38 @@ const ShowtimeDetails = ({ showDeleteBtn, showtime, fetchShowtime }) => {
 			setIsUnreleasingShowtime(false)
 		}
 	}
+	  // Define styles
+	  const containerStyle = {
+		backgroundColor: '#FFF',
+		padding: '10px',
+		borderRadius: '6px',
+		boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+		
+		display: 'flex',
+		flexDirection: 'column',
+		alignItems: 'center',
+	  };
+	
+	  const movieTitleStyle = {
+		fontWeight: 'bold',
+		fontSize: '18px',
+		marginTop: '10px',
+	  };
+	
+	  const movieDetailsStyle = {
+		fontSize: '16px',
+		color: '#000080',
+		margin: '5px 0',
+	  };
+	
+	  const movieImageStyle = {
+		width: '100%',
+		height: 'auto',
+		borderRadius: '4px',
+	  };
 
 	return (
-		<>
+		<div style={containerStyle}>
 			{showDeleteBtn && auth.role === 'admin' && (
 				<div className="mb-4 flex justify-end gap-2">
 					{!showtime.isRelease && (
@@ -176,12 +205,11 @@ const ShowtimeDetails = ({ showDeleteBtn, showtime, fetchShowtime }) => {
 				</div>
 			)}
 			<div className="flex justify-between">
-				<div className="flex flex-col justify-center rounded-tl-lg bg-gradient-to-br from-gray-800 to-gray-700 px-4 py-0.5 text-center font-bold text-white sm:px-8">
-					<p className="text-sm">Theater</p>
-					<p className="text-3xl">{showtime?.theater?.number}</p>
-				</div>
-				<div className="flex w-fit grow items-center justify-center rounded-tr-lg bg-gradient-to-br from-indigo-800 to-blue-700 px-4 py-0.5 text-center text-xl font-bold text-white sm:text-3xl">
-					<p className="mx-auto">{showtime?.theater?.cinema.name}</p>
+				{/* <div className="flex flex-col justify-center  bg-gradient-to-br from-green-800 to-green-700 px-4 py-0.5 text-center font-bold text-white sm:px-8">
+					<p className="text-sm">Screen {showtime?.theater?.number}</p>
+				</div>*/}
+				<div className="flex w-fit grow items-center justify-center  bg-gradient-to-br from-cyan-500 to-blue-300 px-4 py-0.5 text-center font-bold  color-red sm:text-2xl">
+					<p style={movieDetailsStyle} className="mx-auto">{showtime?.theater?.cinema.name} - Screen {showtime?.theater?.number}</p>
 					{!showtime?.isRelease && <EyeSlashIcon className="h-8 w-8" title="Unreleased showtime" />}
 				</div>
 			</div>
@@ -190,42 +218,38 @@ const ShowtimeDetails = ({ showDeleteBtn, showtime, fetchShowtime }) => {
 					<div className="flex items-center">
 						<img src={showtime?.movie?.img} className="w-32 px-4 drop-shadow-md" />
 						<div className="flex flex-col">
-							<h4 className="mr-4 text-xl font-semibold sm:text-2xl md:text-3xl">
+							<h4 style={movieDetailsStyle} className="mr-4 text-xl font-semibold sm:text-2xl md:text-3xl">
 								{showtime?.movie?.name}
 							</h4>
 							{showtime?.movie && (
 								<p className="mr-4 font-medium sm:text-lg">
-									length : {showtime?.movie?.length || '-'} min
+									Duration : {showtime?.movie?.length || '-'} mins
 								</p>
 							)}
 						</div>
 					</div>
 				</div>
 				<div className="flex flex-col">
-					<div className="flex h-full min-w-max flex-col items-center justify-center gap-y-1 bg-gradient-to-br from-indigo-100 to-white py-2 text-center text-xl font-semibold drop-shadow-lg sm:py-4 sm:text-2xl md:items-start">
-						<p className="mx-4 text-lg leading-4 ">
-							{showtime?.showtime &&
-								`${new Date(showtime?.showtime).toLocaleString('default', { weekday: 'long' })}`}
-						</p>
-						<p className="mx-4 ">
-							{showtime?.showtime &&
-								`${new Date(showtime?.showtime).getDate()}
-               					 ${new Date(showtime?.showtime).toLocaleString('default', { month: 'long' })}
-                				${new Date(showtime?.showtime).getFullYear()}`}
-						</p>
-						<p className="mx-4 bg-gradient-to-r from-indigo-800 to-blue-700 bg-clip-text text-4xl font-bold text-transparent sm:text-5xl">
-							{showtime?.showtime &&
-								`${new Date(showtime?.showtime).getHours().toString().padStart(2, '0')} : ${new Date(
-									showtime?.showtime
-								)
-									.getMinutes()
-									.toString()
-									.padStart(2, '0')}`}
-						</p>
-					</div>
-				</div>
+   					 <div className="flex h-full min-w-max flex-col items-center justify-center gap-y-1 bg-gradient-to-br from-indigo-100 to-white py-2 text-center text-xl font-semibold drop-shadow-lg sm:py-4 sm:text-2xl md:items-start">
+       					 {/* Displaying the date in green color */}
+        				<p className="mx-4 text-lg leading-4 bg-gradient-to-r from-green-600 to-green-800 bg-clip-text text-transparent">
+            			{showtime?.showtime &&
+               			 `${new Date(showtime?.showtime).toLocaleString('default', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' })}`}
+        </p>
+        
+        {/* Displaying the time in 12-hour AM/PM format */}
+        <p className="mx-4 bg-gradient-to-r from-green-800 to-green-800 bg-clip-text text-4xl font-bold text-transparent sm:text-5xl">
+            {showtime?.showtime &&
+                new Date(showtime?.showtime).toLocaleTimeString('en-US', {
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    hour12: true
+                })}
+        </p>
+    </div>
+</div>
 			</div>
-		</>
+		</div>
 	)
 }
 

@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import Navbar from "../components/Navbar";
 import ShowtimeDetails from "../components/ShowtimeDetails";
 import { AuthContext } from "../context/AuthContext";
+import { GiTicket } from "react-icons/gi";
 
 const Purchase = () => {
   const navigate = useNavigate();
@@ -107,7 +108,7 @@ const Purchase = () => {
                 disabled={isPurchasing}
               >
                 {isPurchasing ? "Processing..." : "Confirm Booking"}
-                <TicketIcon className="h-6 w-6" />
+                <GiTicket className="h-6 w-6" />
               </button>
             </div>
           </div>
