@@ -4,7 +4,8 @@ import Loading from "../components/Loading";
 import Navbar from "../components/Navbar";
 import ShowtimeDetails from "../components/ShowtimeDetails";
 import { AuthContext } from "../context/AuthContext";
-
+import StarBorderIcon from '@mui/icons-material/StarBorder'; // For Reward Points icon
+import ConfirmationNumberIcon from '@mui/icons-material/ConfirmationNumber';
 const Tickets = () => {
   const { auth } = useContext(AuthContext);
   const [tickets, setTickets] = useState({ future: [], past: [] });
@@ -60,10 +61,10 @@ const Tickets = () => {
             <h2 className="text-3xl font-bold text-gray-900 py-9 px-4">Membership Type: {membership}</h2>
           </div>
           <div className="flex items-center  border-2 border-indigo-900 rounded-md w-1/2 mb-4 ">
-            <h2 className="text-3xl font-bold text-gray-900 py-9 px-4">Reward Points: {rewardPoints}</h2>
+            <h2 className="text-3xl font-bold text-gray-900 py-9 px-4"><StarBorderIcon fontSize="large"/> Reward Points: {rewardPoints}</h2>
           </div>
         </div>
-        <h2 className="text-3xl font-bold text-gray-900">My Tickets</h2>
+        <h2 className="text-3xl font-bold text-gray-900"><ConfirmationNumberIcon fontSize="large"/> My Tickets</h2>
         {isFetchingticketsDone && tickets.future.length > 0 ? (
           <div className="grid grid-cols-1 gap-4 xl:grid-cols-2 min-[1920px]:grid-cols-3">
             {tickets.future.map((ticket, index) => (
