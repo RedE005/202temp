@@ -252,18 +252,7 @@ const Theater = ({ theaterId, movies, selectedDate, filterMovie, setSelectedDate
 										/>
 									</label>
 									
-									<div
-										className="flex items-center gap-x-2 gap-y-1 lg:flex-col lg:items-start"
-										title="Gap between showtimes"
-									>
-										<label className="whitespace-nowrap font-semibold leading-5">Gap:</label>
-										<input
-											type="time"
-											className="h-9 w-full rounded bg-white px-2 py-1 font-semibold text-gray-900 drop-shadow-sm disabled:bg-gray-300"
-											disabled={!watch('autoIncrease')}
-											{...register('gap')}
-										/>
-									</div>
+									
 									
 								</div>
 							</div>
