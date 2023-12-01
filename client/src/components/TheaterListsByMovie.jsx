@@ -1,3 +1,5 @@
+
+
 import axios from "axios";
 import { useEffect, useState } from "react";
 import "react-toastify/dist/ReactToastify.css";
@@ -47,9 +49,9 @@ const TheaterListsByMovie = ({
         filteredCinemas = response.data.data.filter(
           (cinema) => cinema.location === selectedLocation
         );
-      }  
-	  console.log(filteredCinemas);
-	  setCinemas(filteredCinemas);
+      }
+      console.log(filteredCinemas);
+      setCinemas(filteredCinemas);
     } catch (error) {
       console.error(error);
     } finally {
@@ -116,55 +118,80 @@ const TheaterListsByMovie = ({
     return true;
   });
 
-  
   return (
-    <div className="flex flex-col min-h-screen bg-gradient-to-br from-indigo-500 via-red-500 to-pink-500 p-4">
+    <>
       <CinemaLists {...props} />
-      <div className="container mx-auto mt-4 p-4 rounded-lg shadow-lg">
-        <div className="flex flex-col lg:flex-row lg:items-center justify-between bg-white p-4 rounded-md shadow-md">
-          <div className="flex items-center space-x-4">
-            <img
-              src={movies[selectedMovieIndex].img}
-              alt={`Poster of ${movies[selectedMovieIndex].name}`}
-              className="w-32 h-auto rounded-md shadow-lg"
-            />
-            <div>
-              <h4 className="text-2xl font-semibold">
-                {movies[selectedMovieIndex].name}
-              </h4>
-              <p className="text-md font-medium">
-                Length: {movies[selectedMovieIndex].length || "-"} min
-              </p>
-            </div>
-          </div>
+      <div className="mx-4 h-fit rounded-md bg-gradient-to-br from-indigo-900 to-red-500 text-white drop-shadow-lg sm:mx-8">
+        <div className="flex flex-col gap-6 p-4 sm:p-6">
           <DateSelector
             selectedDate={selectedDate}
             setSelectedDate={setSelectedDate}
           />
-        </div>
-        <div className="flex flex-wrap justify-center gap-4 mt-4">
-          {isFetchingMoviesDone ? (
-            filteredTheaters.map((theater, index) => (
-              <TheaterShort
-                key={theater._id}
-                theaterId={theater._id}
-                movies={movies}
-                selectedDate={selectedDate}
-                filterMovie={movies[selectedMovieIndex]}
-              />
-            ))
+          <div className="flex flex-col gap-4 rounded-md bg-white py-4 px-4 shadow-md">
+            <div className="flex items-center">
+              <div className="flex justify-center items-center w-40 h-40 rounded-full overflow-hidden bg-white p-1">
+                <img
+                  src={movies[selectedMovieIndex].img}
+                  className="h-full w-auto"
+                  alt={movies[selectedMovieIndex].name}
+                />
+              </div>
+              <div className="ml-4">
+                <h4 className="text-3xl font-bold text-gray-800">
+                  {movies[selectedMovieIndex].name}
+                </h4>
+                <p className="text-md text-gray-600">
+                  Length: {movies[selectedMovieIndex].length || "-"} min
+                </p>
+              </div>
+            </div>
+          </div>
+          {isFetchingTheatersDone ? (
+            <div className="flex flex-col">
+              {filteredTheaters.map((theater, index) => (
+                <div
+                  key={index}
+                  className={`flex flex-col ${
+                    index !== 0 &&
+                    filteredTheaters[index - 1]?.cinema.name !==
+                      filteredTheaters[index].cinema.name &&
+                    "mt-6"
+                  }`}
+                >
+                  {filteredTheaters[index - 1]?.cinema.name !==
+                    filteredTheaters[index].cinema.name && (
+                    <div className=" bg-violet-700 px-2 py-1.5 text-center text-4xl font-semibold text-white sm:py-2">
+                      <h2>{theater.cinema.name}</h2>
+                    </div>
+                  )}
+                  <TheaterShort
+                    theaterId={theater._id}
+                    movies={movies}
+                    selectedDate={selectedDate}
+                    filterMovie={movies[selectedMovieIndex]}
+                    rounded={
+                      index === filteredTheaters.length - 1 ||
+                      filteredTheaters[index + 1]?.cinema.name !==
+                        filteredTheaters[index].cinema.name
+                    }
+                  />
+                </div>
+              ))}
+              {filteredTheaters.length === 0 && (
+                <p className="text-center text-xl font-semibold">
+                  There are no showtimes available.
+                </p>
+              )}
+            </div>
           ) : (
             <Loading />
           )}
         </div>
-        {filteredTheaters.length === 0 && isFetchingMoviesDone && (
-          <p className="text-center text-xl font-semibold text-white">
-            No showtimes available
-          </p>
-        )}
       </div>
-    </div>
+    </>
   );
 };
 
 export default TheaterListsByMovie;
+
+

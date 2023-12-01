@@ -215,6 +215,7 @@ const Navbar = () => {
                 src="https://files.oaiusercontent.com/file-q7ZnQDJ6h4qtcH1KMMSEFh31?se=2023-12-01T05%3A09%3A43Z&sp=r&sv=2021-08-06&sr=b&rscc=max-age%3D31536000%2C%20immutable&rscd=attachment%3B%20filename%3De2170cbc-c1a1-49bd-aab9-fabf4f46ddbb.webp&sig=nRziMIetfq42DTu1zFuzfs5%2B8IWEWTP0WL1MfA8oC40%3D" // Your image URL goes here
                 alt="ReelRover Logo"
               />
+            
             </Typography>
           </Box>
           <div>
