@@ -232,6 +232,8 @@ const Home = () => {
 
       {auth.role === "admin" && (
         <form className="px-6" onSubmit={handleTicketPrice}>
+            <h6 className="text-3xl font-bold text-white">
+            Configure Ticket Price:</h6>
           <input
             type="number"
             placeholder="Configure Ticket Price"
