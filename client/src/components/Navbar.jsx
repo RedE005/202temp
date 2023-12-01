@@ -395,9 +395,10 @@ const Navbar = () => {
 
                     </>
                   )}
+                  {auth.role === "admin" && (
                   <MenuItem onClick={() => navigate("/cinema")} style={linkStyle(isActive("/cinema"))} className="menuItem">
-                    <TheatersIcon /> {auth.role === "admin" ? ("Configure Theaters") : ("View Theaters")}
-                  </MenuItem>
+                    <TheatersIcon /> Configure Theaters
+                  </MenuItem>) }
 
                   <MenuItem style={logoutButtonStyle} disabled={isLoggingOut} onClick={() => onLogout()} className="menuItem">
                     <ExitToAppIcon /> {isLoggingOut ? "Processing..." : "Logout"}
