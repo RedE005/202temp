@@ -107,7 +107,7 @@ const Movie = () => {
   const min = sumMin % 60;
 
   return (
-    <div className="flex min-h-screen flex-col bg-gradient-to-br from-indigo-900 to-red-500 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="flex min-h-screen flex-col bg-gradient-to-br from-indigo-900 to-red-500  ">
       <Navbar />
       <div className="container mx-auto mt-4 flex w-full max-w-7xl flex-col items-center justify-center gap-8 rounded-lg bg-white/80 p-6 shadow-lg">
         <h2 className="text-3xl font-bold text-gray-900">Movie Lists</h2>
