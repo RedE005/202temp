@@ -184,7 +184,7 @@ const Navbar = () => {
   const logoStyle = (isActive) => ({
     borderRadius: "20px", // Rounded corners
     border: "none", // No border
-    cursor: "pointer", // Pointer on hover
+     // Pointer on hover
     fontSize: "1.875rem", // Font size
     fontWeight: "500", // Font weight
     textAlign: "center", // Center text
