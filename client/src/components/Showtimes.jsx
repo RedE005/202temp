@@ -2,6 +2,7 @@ import { EyeSlashIcon } from '@heroicons/react/24/outline'
 import { useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { AuthContext } from '../context/AuthContext'
+import { MdDoNotDisturbAlt } from "react-icons/md";
 
 const Showtimes = ({ showtimes, movies, selectedDate, filterMovie, showMovieDetail = true }) => {
 	const { auth } = useContext(AuthContext)
@@ -92,8 +93,8 @@ const Showtimes = ({ showtimes, movies, selectedDate, filterMovie, showMovieDeta
 																	(s) => new Date(s.showtime) > new Date()
 																).showtime
 														  ).getTime()
-														? 'flex items-center gap-1 rounded-md bg-gradient-to-br from-indigo-600 to-blue-500 px-2 py-1 text-lg text-white drop-shadow-sm hover:from-indigo-500 hover:to-blue-400'
-														: 'flex items-center gap-1 rounded-md bg-gradient-to-br from-gray-600 to-gray-500 px-2 py-1 text-lg text-white drop-shadow-sm hover:from-gray-500 hover:to-gray-400'
+														? 'flex items-center gap-1  bg-gradient-to-br from-red-600 to-blue-500 px-2 py-1 text-lg text-white drop-shadow-sm hover:from-red-500 hover:to-red-400'
+														: 'flex items-center gap-1  bg-gradient-to-br from-red-600 to-blue-500 px-2 py-1 text-lg text-white drop-shadow-sm hover:from-red-500 hover:to-red-400'
 												}
 												onClick={() => {
 													if (!isPast(new Date(showtime.showtime)) || auth.role === 'admin')
@@ -101,7 +102,7 @@ const Showtimes = ({ showtimes, movies, selectedDate, filterMovie, showMovieDeta
 												}}
 											>
 												{!showtime.isRelease && (
-													<EyeSlashIcon className="h-6 w-6" title="Unreleased showtime" />
+													<MdDoNotDisturbAlt  className="h-6 w-6" title="Unreleased showtime" />
 												)}
 												{`${new Date(showtime.showtime)
 													.getHours()

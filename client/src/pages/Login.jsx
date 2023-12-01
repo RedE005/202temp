@@ -23,7 +23,7 @@ const Login = () => {
 		try {
 			const response = await axios.post('/auth/login', data)
 			// console.log(response.data)
-			toast.success('Login successful!', {
+			toast.success('Login success!', {
 				position: 'top-center',
 				autoClose: 2000,
 				pauseOnHover: false

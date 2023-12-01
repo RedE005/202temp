@@ -1,20 +1,17 @@
-import {
-  ClockIcon,
-  FilmIcon,
-  HomeModernIcon,
-  MagnifyingGlassIcon,
-  TicketIcon,
-  UsersIcon,
-  VideoCameraIcon,
-} from "@heroicons/react/24/outline";
-import { Bars3Icon } from "@heroicons/react/24/solid";
 import axios from "axios";
-import { useContext, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useContext, useState, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { AuthContext } from "../context/AuthContext";
 import { useLocation } from "../context/LocationContext";
 import Modal from "react-modal";
+import TheatersIcon from '@mui/icons-material/Theaters';
+import { AppBar, Toolbar, IconButton, Link, Button, Typography, Box } from '@mui/material';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle'; // For profile icon
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import PersonIcon from '@mui/icons-material/Person'; // For Profile icon
+import ExitToAppIcon from '@mui/icons-material/ExitToApp'; // For Logout icon
 
 const Navbar = () => {
   const { auth, setAuth } = useContext(AuthContext);
@@ -40,7 +37,7 @@ const Navbar = () => {
   };
 
   const navigate = useNavigate();
-
+  const isActive = (path) => window.location.pathname === path;
   const onLogout = async () => {
     try {
       SetLoggingOut(true);
@@ -66,202 +63,363 @@ const Navbar = () => {
     }
   };
 
-  const menuLists = () => {
-    return (
-      <>
-        <div className="flex flex-col gap-2 lg:flex-row">
-        {auth.role === "admin" && (
-          <>
-          <Link
-            to={"/cinema"}
-            className={`flex items-center justify-center gap-2 rounded-md px-2 py-1 text-white hover:bg-gray-500 ${
-              window.location.pathname === "/cinema"
-                ? "bg-gradient-to-br from-indigo-800 to-blue-700"
-                : "bg-gray-600"
-            }`}
-          >
-            <HomeModernIcon className="h-6 w-6" />
-            <p>Cinema</p>
-          </Link>
-          </>
-        )}
-        {auth.role === "admin" && (
-          <>
-          <Link
-            to={"/schedule"}
-            className={`flex items-center justify-center gap-2 rounded-md px-2 py-1 text-white hover:bg-gray-500 ${
-              window.location.pathname === "/schedule"
-                ? "bg-gradient-to-br from-indigo-800 to-blue-700"
-                : "bg-gray-600"
-            }`}
-          >
-            <ClockIcon className="h-6 w-6" />
-            <p>Schedule</p>
-          </Link>
-          </>
-        )}
-          {auth.role && (
-            <Link
-              to={"/ticket"}
-              className={`flex items-center justify-center gap-2 rounded-md px-2 py-1 text-white hover:bg-gray-500 ${
-                window.location.pathname === "/ticket"
-                  ? "bg-gradient-to-br from-indigo-800 to-blue-700"
-                  : "bg-gray-600"
-              }`}
-            >
-              <TicketIcon className="h-6 w-6" />
-              <p>My Profile</p>
-            </Link>
-          )}
-          {auth.role === "admin" && (
-            <>
-              <Link
-                to={"/movie"}
-                className={`flex items-center justify-center gap-2 rounded-md px-2 py-1 text-white hover:bg-gray-500 ${
-                  window.location.pathname === "/movie"
-                    ? "bg-gradient-to-br from-indigo-800 to-blue-700"
-                    : "bg-gray-600"
-                }`}
-              >
-                <VideoCameraIcon className="h-6 w-6" />
-                <p>Movie</p>
-              </Link>
-              <Link
-                to={"/search"}
-                className={`flex items-center justify-center gap-2 rounded-md px-2 py-1 text-white hover:bg-gray-500 ${
-                  window.location.pathname === "/search"
-                    ? "bg-gradient-to-br from-indigo-800 to-blue-700"
-                    : "bg-gray-600"
-                }`}
-              >
-                <MagnifyingGlassIcon className="h-6 w-6" />
-                <p>Search</p>
-              </Link>
-              <Link
-                to={"/user"}
-                className={`flex items-center justify-center gap-2 rounded-md px-2 py-1 text-white hover:bg-gray-500 ${
-                  window.location.pathname === "/user"
-                    ? "bg-gradient-to-br from-indigo-800 to-blue-700"
-                    : "bg-gray-600"
-                }`}
-              >
-                <UsersIcon className="h-6 w-6" />
-                <p>User</p>
-              </Link>
-              <Link
-                to={"/analytics"}
-                className={`flex items-center justify-center gap-2 rounded-md px-2 py-1 text-white hover:bg-gray-500 ${
-                  window.location.pathname === "/analytics"
-                    ? "bg-gradient-to-br from-indigo-800 to-blue-700"
-                    : "bg-gray-600"
-                }`}
-              >
-                <UsersIcon className="h-6 w-6" />
-                <p>Analytics</p>
-              </Link>
-            </>
-          )}
-        </div>
+  const [anchorEl, setAnchorEl] = useState(null); // Add this to manage dropdown menu anchor
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const handleLoginModalClose = () => setLoginModalOpen(false);
 
-        <div className="flex grow items-center justify-center gap-3 lg:justify-end">
-          <button
-            className="rounded-lg bg-gradient-to-br from-red-400 to-red-400 px-2 py-1 text-white drop-shadow-md hover:from-indigo-500 hover:to-blue-400"
-            onClick={openLocationModal}
-          >
-           {selectedLocation ? <>{selectedLocation}</> : "📌Location"}
-          </button>
-          {locationModalOpen && (
-            <Modal
-              isOpen={locationModalOpen}
-              onRequestClose={closeLocationModal}
-              shouldCloseOnOverlayClick={false}
-              contentLabel="Location Modal"
-              className="modal w-full max-w-lg overflow-y-auto fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white p-8 rounded-md z-90 border-4 border-solid border-gray-800"
-            >
-              <h2 className="text-2xl font-bold bg-white mb-4 p-4 rounded-t-md">
-                Select location:
-              </h2>
-              <div className="flex flex-row gap-4 mb-4 py-4">
-                <button
-                  className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 flex-grow"
-                  onClick={() => handleLocation("San Jose")}
-                >
-                  San Jose
-                </button>
-                <button
-                  className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 flex-grow"
-                  onClick={() => handleLocation("Sunnyvale")}
-                >
-                  Sunnyvale
-                </button>
-                <button
-                  className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 flex-grow"
-                  onClick={() => handleLocation("Fremont")}
-                >
-                  Fremont
-                </button>
-              </div>
-              <div className="flex justify-end py-2">
-                <button
-                  className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
-                  onClick={closeLocationModal}
-                >
-                  Close
-                </button>
-              </div>
-            </Modal>
-          )}
+  const handleCloseMenu = () => {
+    setIsMenuOpen(false);
+    setTimeout(() => {
+      if (!isMenuOpen) {
+        setAnchorEl(null);
+      }
+    }, 100);
+  };
 
-          {auth.username && (
-            <p className="text-md whitespace-nowrap leading-none text-white">
-              Welcome {auth.username}!
-            </p>
-          )}
-          {auth.token ? (
-            <button
-              className="rounded-lg bg-gradient-to-br from-indigo-600 to-blue-500 px-2 py-1 text-white drop-shadow-md hover:from-indigo-500 hover:to-blue-400 disabled:from-slate-500 disabled:to-slate-400"
-              onClick={() => onLogout()}
-              disabled={isLoggingOut}
-            >
-              {isLoggingOut ? "Processing..." : "Logout"}
-            </button>
-          ) : (
-            <button className="rounded-lg bg-gradient-to-br from-indigo-600 to-blue-500 px-2 py-1 text-white drop-shadow-md hover:from-indigo-500 hover:to-blue-400">
-              <Link to={"/login"}>Login</Link>
-            </button>
-          )}
-        </div>
-      </>
-    );
+
+  const handleUserMenu = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleCloseUserMenu = () => {
+    setAnchorEl(null);
+  };
+  const handleLogin = () => {
+    setIsLoggedIn(true);
+    handleLoginModalClose();
+  };
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+    handleCloseUserMenu();
+  };
+
+
+  const handleProfileHover = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  //styles
+  const locationButtonStyle = {
+    whiteSpace: 'nowrap',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+    maxWidth: '150px',
+    borderRadius: "20px", // Rounded corners
+    backgroundColor: "#ff4757", // Red color for the button
+    color: "white", // Text color
+    padding: "10px 20px", // Padding
+    border: "none", // No border
+    cursor: "pointer", // Pointer on hover
+    boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)", // Box shadow for depth
+    display: "flex", // To align the icon and text
+    alignItems: "center", // Center items vertically
+    justifyContent: "center", // Center items horizontally
+    gap: "8px", // Space between icon and text
+    fontWeight: "500", // Font weight
+    fontSize: "0.875rem", // Font size
+
+  };
+
+  // Icon style if you're using an SVG or Material UI icon
+  const locationIconStyle = {
+    marginRight: "5px", // Space between icon and text
+  };
+
+  const toolbarStyles = {
+    display: 'flex',
+    justifyContent: 'flex-end', // Align items to the end of the toolbar
+    alignItems: 'center', // Center items vertically
+    // Add any additional styles you need for the toolbar
+  };
+
+  const buttonStyle = {
+    borderRadius: "20px", // Rounded corners
+    padding: "10px 60px", // Padding on all sides
+    border: "none", // No border
+    cursor: "pointer", // Pointer on hover
+    fontSize: "0.875rem", // Font size
+    fontWeight: "500", // Font weight
+    textAlign: "center", // Center text
+    textDecoration: "none", // No underline on text,
+    whiteSpace: 'nowrap',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+    maxWidth: '170px',
+    display: "inline-flex", // Use inline-flex to allow flexbox properties
+    alignItems: 'center', // Align text and icon vertically
+    justifyContent: 'center', // Center text and icon horizontally
+    margin: "0 10px", // Margin on all sides
+    transition: "background-color 0.3s", // Smooth background transition
+    backgroundColor: "#ff3d71", // Default background
+    color: "white", // Text color
+    // Add more styles for hover state as needed
+    ':hover': {
+      backgroundColor: '#ff6384',
+    }
+  };
+
+  const linkStyle = (isActive) => ({
+    ...buttonStyle,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: "10px",
+    borderRadius: "20px",
+    padding: "10px 16px",
+    textDecoration: "none",
+    color: isActive ? "white" : "#9ca3af", // Active color is white, inactive is grey
+    backgroundColor: isActive ? "#4f46e5" : "3b82f6", // Active link has a background
+    border: "1px solid #9ca3af", // Border to match the inactive text color
+    fontWeight: "500",
+    margin: "0 8px",
+    transition: "all 0.3s ease",
+  });
+
+  const logoutButtonStyle = {
+    ...buttonStyle,
+    backgroundColor: isLoggingOut ? "#64748b" : "#3b82f6", // Conditional background color
+  };
+
+
+
+  const logoStyle = (isActive) => ({
+    borderRadius: "20px", // Rounded corners
+    border: "none", // No border
+     // Pointer on hover
+    fontSize: "1.875rem", // Font size
+    fontWeight: "500", // Font weight
+    textAlign: "center", // Center text
+    backgroundColor: "#bg-gradient-to-br from-red-500 to-indigo-900", // Default background
+    display: "flex",
+    alignItems: "center",
+    gap: "12px",
+    color: "white",
+    textDecoration: "none",
+    cursor: "pointer",
+    height: "75px",
+    width: "200px"
+  });
+
+  const styles = {
+    navbar: `bg-gradient-to-br from-red-500 to-indigo-900 `
   };
 
   return (
-    <nav className="flex flex-col items-center justify-between gap-2 bg-gray-900 px-4 py-3 drop-shadow-lg lg:flex-row lg:justify-start sm:px-8">
-      <div className="flex w-full flex-row justify-between lg:w-fit">
-        <button
-          className="flex flex-row items-center gap-2"
-          onClick={() => navigate("/")}
-        >
-          <FilmIcon className="h-8 w-8 text-white" />
-          <h1 className="mr-2 text-xl text-white">Cinema</h1>
-        </button>
-        <button
-          className="flex h-8 w-8 items-center justify-center rounded hover:bg-gray-700 lg:hidden"
-          onClick={() => toggleMenu()}
-        >
-          <Bars3Icon className="h-6 w-6 text-white" />
-        </button>
-      </div>
-      <div className="hidden grow justify-between gap-2 lg:flex">
-        {menuLists()}
-      </div>
-      {menuOpen && (
-        <div className="flex w-full grow flex-col gap-2 lg:hidden">
-          {menuLists()}
-        </div>
-      )}
-    </nav>
+    <>
+      <AppBar position="static" className={styles.navbar}>
+        <Toolbar style={toolbarStyles}>
+
+          <Box sx={{ display: 'flex', alignItems: 'center', flexGrow: 1, width: '100ch' }}>
+
+            <Typography variant="h2" component="div" sx={{ ml: 2 }}>
+              <img style={logoStyle(isActive("/cinema"))} onClick={() => navigate("/")}
+                src="https://files.oaiusercontent.com/file-q7ZnQDJ6h4qtcH1KMMSEFh31?se=2023-12-01T05%3A09%3A43Z&sp=r&sv=2021-08-06&sr=b&rscc=max-age%3D31536000%2C%20immutable&rscd=attachment%3B%20filename%3De2170cbc-c1a1-49bd-aab9-fabf4f46ddbb.webp&sig=nRziMIetfq42DTu1zFuzfs5%2B8IWEWTP0WL1MfA8oC40%3D" // Your image URL goes here
+                alt="ReelRover Logo"
+              />
+            </Typography>
+          </Box>
+          <div>
+            <Link color="inherit" underline="none" sx={{ mx: 1 }}>
+              <button style={locationButtonStyle} onClick={openLocationModal}>
+                <span style={locationIconStyle}> <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+                </svg>
+                </span>{" "}
+                {selectedLocation || "Location"}
+              </button>
+              {locationModalOpen && (
+                <Modal
+                  isOpen={locationModalOpen}
+                  onRequestClose={closeLocationModal}
+                  shouldCloseOnOverlayClick={false}
+                  contentLabel="Location Modal"
+                  style={{
+                    overlay: {
+                      backgroundColor: 'rgba(0, 0, 0, 0.75)',
+                      zIndex: 50,
+                    },
+                    content: {
+                      top: '50%',
+                      left: '50%',
+                      right: 'auto',
+                      bottom: 'auto',
+                      marginRight: '-50%',
+                      transform: 'translate(-50%, -50%)',
+                      border: 'none',
+                      borderRadius: '1rem',
+                      padding: '2rem',
+                      maxWidth: '32rem',
+                      width: '90%',
+                      backgroundColor: '#fff',
+                      boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+                    },
+                  }}
+                >
+                  <h2
+                    style={{
+                      textAlign: "center",
+                      fontWeight: "600",
+                      marginBottom: "24px",
+                    }}
+                  >
+                    Select location:
+                  </h2>
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      gap: "16px",
+                      marginBottom: "24px",
+                    }}
+                  >
+                    <button
+                      style={{
+                        backgroundColor: "#ef4444",
+                        color: "white",
+                        padding: "12px 24px",
+                        border: "none",
+                        borderRadius: "4px",
+                        cursor: "pointer",
+                        fontWeight: "500",
+                        fontSize: "1rem",
+                      }}
+                      onClick={() => handleLocation("San Jose")}
+                    >
+                      San Jose
+                    </button>
+                    <button
+                      style={{
+                        backgroundColor: "#ef4444",
+                        color: "white",
+                        padding: "12px 24px",
+                        border: "none",
+                        borderRadius: "4px",
+                        cursor: "pointer",
+                        fontWeight: "500",
+                        fontSize: "1rem",
+                      }}
+                      onClick={() => handleLocation("Sunnyvale")}
+                    >
+                      Sunnyvale
+                    </button>
+                    <button
+                      style={{
+                        backgroundColor: "#ef4444",
+                        color: "white",
+                        padding: "12px 24px",
+                        border: "none",
+                        borderRadius: "4px",
+                        cursor: "pointer",
+                        fontWeight: "500",
+                        fontSize: "1rem",
+                      }}
+                      onClick={() => handleLocation("Fremont")}
+                    >
+                      Fremont
+                    </button>
+                  </div>
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "flex-end",
+                    }}
+                  >
+                    <button
+                      style={{
+                        backgroundColor: "#3b82f6",
+                        color: "white",
+                        padding: "12px 24px",
+                        border: "none",
+                        borderRadius: "4px",
+                        cursor: "pointer",
+                        fontWeight: "500",
+                      }}
+                      onClick={closeLocationModal}
+                    >
+                      Close
+                    </button>
+                  </div>
+                </Modal>
+              )}</Link>
+
+          </div>
+          {auth.token ? (
+            <div>
+              <div onMouseLeave={handleCloseMenu}>
+                <IconButton
+                  size="large"
+                  edge="end"
+                  color="inherit"
+                  aria-label="account of current user"
+                  aria-controls="menu-appbar"
+                  aria-haspopup="true"
+                  onClick={handleUserMenu}
+                  sx={{ ml: 'auto' }} // Align to the right
+                  onMouseEnter={handleProfileHover}
+
+                >
+                  <AccountCircleIcon fontSize="large" />
+                </IconButton>
+                <Menu
+                  id="menu-appbar"
+                  anchorEl={anchorEl}
+                  anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'right',
+                  }}
+                  keepMounted
+                  transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                  }}
+                  open={Boolean(anchorEl)}
+                  onClose={handleCloseUserMenu}
+                  MenuListProps={{ onMouseEnter: () => setIsMenuOpen(true), onMouseLeave: handleCloseMenu }}
+                >
+                  {auth.role != "admin" && (
+
+                    <MenuItem onClick={() => navigate("/ticket")} style={linkStyle(isActive("/ticket"))} className="menuItem">
+                      <PersonIcon />My Profile
+                    </MenuItem>
+
+                  )}
+                  {auth.role === "admin" && (
+                    <>
+
+                      <MenuItem onClick={() => navigate("/movie")} style={linkStyle(isActive("/movie"))} className="menuItem">
+                        Add Movies
+                      </MenuItem>
+                      <MenuItem onClick={() => navigate("/analytics")} style={linkStyle(isActive("/analytics"))} className="menuItem">
+                        Analytics Dashboard
+                      </MenuItem>
+
+                    </>
+                  )}
+                  <MenuItem onClick={() => navigate("/cinema")} style={linkStyle(isActive("/cinema"))} className="menuItem">
+                    <TheatersIcon /> {auth.role === "admin" ? ("Configure Theaters") : ("View Theaters")}
+                  </MenuItem>
+
+                  <MenuItem style={logoutButtonStyle} disabled={isLoggingOut} onClick={() => onLogout()} className="menuItem">
+                    <ExitToAppIcon /> {isLoggingOut ? "Processing..." : "Logout"}
+                  </MenuItem>
+                </Menu>
+              </div>
+            </div>
+          ) : (
+            <div style={toolbarStyles}>
+              <Link to={"/login"}>
+                <Button color="inherit" style={buttonStyle} onClick={() => navigate("/login")} sx={{ ml: 'auto' }}>Login / Sign Up</Button>
+              </Link>
+            </div>
+          )}
+        </Toolbar>
+
+      </AppBar>
+
+    </>
+
   );
 };
 
 export default Navbar;
+

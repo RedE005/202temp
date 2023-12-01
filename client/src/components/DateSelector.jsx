@@ -127,7 +127,7 @@ const DateSelector = ({ selectedDate, setSelectedDate }) => {
 
 	return (
 		<div className="flex items-center justify-center gap-2">
-			<div className="relative flex justify-between gap-2  bg-gradient-to-br from-yellow-800 to-yellow-800 p-8 font-bold text-white">
+			<div className="relative flex justify-between gap-2  bg-gradient-to-br from-red-600 to-indigo-700 p-8 font-bold text-white">
 				{auth.role === 'admin' || isEditableDate(selectedDate) ? (
 					<button
 						title="Go to yesterday"
@@ -148,7 +148,7 @@ const DateSelector = ({ selectedDate, setSelectedDate }) => {
 							min={auth.role !== 'admin' && new Date().toLocaleDateString('en-CA')}
 							required
 							autoFocus
-							className={`w-full rounded border border-white bg-gradient-to-br from-green-800 to-yellow-700 px-5 text-center text-2xl font-semibold drop-shadow-sm sm:text-3xl`}
+							className={`w-full rounded border border-white bg-gradient-to-br from-grey-800 to-yellow-700 px-5 text-center text-2xl font-semibold drop-shadow-sm sm:text-3xl`}
 							value={selectedDate.toLocaleDateString('en-CA')}
 							onChange={handleChange}
 							style={{ colorScheme: 'dark' }}

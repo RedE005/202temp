@@ -45,14 +45,14 @@ const CinemaLists = ({
       // console.log(response.data)
       reset();
       fetchCinemas(data.name);
-      toast.success("Add cinema successful!", {
+      toast.success("theater added successfully!", {
         position: "top-center",
         autoClose: 2000,
         pauseOnHover: false,
       });
     } catch (error) {
       console.error(error);
-      toast.error("Error", {
+      toast.error("Error adding theater.", {
         position: "top-center",
         autoClose: 2000,
         pauseOnHover: false,
@@ -95,21 +95,23 @@ const CinemaLists = ({
         );
       })
     ) : (
-      <div>No cinemas found</div>
+      <div>No theaters found</div>
     );
   };
 
   return (
     <>
-      <div className="mx-4 flex h-fit flex-row gap-2 bg-gradient-to-br from-indigo-200 to-blue-100 p-4 text-gray-900  sm:mx-8 sm:p-6">
-        <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
-          <h2 className="text-3xl font-bold">Theatre List</h2>
+      <div className="container mx-auto p-6 bg-gradient-to-r from-indigo-500 via-purple-500 to-red-500">
+        <div className="flex justify-between items-center">
+          {auth.role=="admin" ? <h1 className="text-3xl font-semibold text-white">Theaters</h1> : <h1 className="text-3xl font-semibold text-white">Theaters in your area</h1> }
+          
           {auth.role === "admin" && (
             <button
-              className=" flex w-fit sm:justify-end rounded-lg bg-gradient-to-br from-red-400 to-red-400 px-2 py-1 text-white drop-shadow-md hover:from-indigo-500 hover:to-blue-400"
+              className="rounded-full bg-white p-3 shadow-lg hover:bg-gray-100 transition duration-300"
+              aria-label="Add Theater"
               onClick={openLocationModal}
             >
-              Add New Cinema +
+              Add New Theater +
             </button>
           )}
           {locationModalOpen && (
@@ -118,60 +120,98 @@ const CinemaLists = ({
               onRequestClose={closeLocationModal}
               shouldCloseOnOverlayClick={false}
               contentLabel="Location Modal"
-              className="modal w-full max-w-lg overflow-y-auto fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white p-8 rounded-md z-90 border-4 border-solid border-gray-800"
-            >
+              style={{
+                overlay: {
+                  backgroundColor: 'rgba(0, 0, 0, 0.75)',
+                  zIndex: 50,
+                },
+                content: {
+                  top: '50%',
+                  left: '50%',
+                  right: 'auto',
+                  bottom: 'auto',
+                  marginRight: '-50%',
+                  transform: 'translate(-50%, -50%)',
+                  border: 'none',
+                  borderRadius: '1rem',
+                  padding: '2rem',
+                  maxWidth: '32rem',
+                  width: '90%',
+                  backgroundColor: '#fff',
+                  boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+                },
+              }}>
               <h2 className="text-2xl font-bold bg-white mb-4 rounded-t-md">
                 Select location:
               </h2>
               <form
-                className="flex flex-wrap items-center justify-between gap-y-2"
+                className="flex flex-col gap-4 bg-gradient-to-br from-indigo-900 to-red-500 p-8 rounded-lg shadow-md"
                 onSubmit={handleSubmit(onAddCinema)}
               >
                 <input
-                  placeholder="Type a cinema name"
-                  className="w-full sm:w-full rounded border border-gray-300 px-3 py-1"
+                  placeholder="Theater Name"
+                  className="w-full rounded-lg border-0 px-4 py-2 text-gray-700 placeholder-gray-500 focus:ring-2 focus:ring-blue-300"
                   required
                   {...register("name", { required: true })}
                 />
                 <input
-                  placeholder="Type location of this cinema"
-                  className="w-full sm:w-full rounded border border-gray-300 px-3 py-1"
+                  placeholder="Location"
+                  className="w-full rounded-lg border-0 px-4 py-2 text-gray-700 placeholder-gray-500 focus:ring-2 focus:ring-blue-300"
                   required
                   {...register("location", { required: true })}
                 />
                 <button
                   disabled={isAdding}
-                  className="w-full sm:w-full bg-gradient-to-r from-indigo-600 to-blue-500 px-2 py-1 font-medium text-white rounded-md hover:from-indigo-500 hover:to-blue-400 disabled:from-slate-500 disabled:to-slate-400"
+                  className="w-full rounded-lg bg-blue-600 px-4 py-2 text-white font-semibold tracking-wide transition duration-150 ease-in-out hover:bg-blue-700 disabled:bg-blue-300"
                 >
-                  {isAdding ? "Processing..." : "ADD +"}
+                  {isAdding ? "Adding..." : "Add Theater"}
+                </button>
+                <button
+                  onClick={closeLocationModal}
+                  className="w-full rounded-lg bg-blue-600 px-4 py-2 text-white font-semibold tracking-wide transition duration-150 ease-in-out hover:bg-blue-700 disabled:bg-blue-300"
+                >
+                  Cancel
                 </button>
               </form>
             </Modal>
           )}
         </div>
-        <select
-            className="block w-full  border border-gray-300 p-2 pl-10 text-black-900"
-            placeholder="Search cinema"
-            {...register("search")}
-            onChange={(e) => {
-              const index = cinemas.findIndex(c => c.name === e.target.value);
-              setSelectedCinemaIndex(index);
-              sessionStorage.setItem("selectedCinemaIndex", index);
-            }}
-          >
-            <option value="">Select a theatre</option>
-            {cinemas.map((cinema, index) => (
-              <option key={cinema._id} value={cinema.name}>
-                {cinema.name}
-              </option>
-            ))}
-          </select>
-        
+        <div className="mt-6 mb-8">
+          <div className="relative">
+            <MagnifyingGlassIcon className="w-5 h-5 absolute left-3 top-1/2 transform -translate-y-1/2 text-white" />
+            <input
+              type="search"
+              className="w-full pl-10 pr-4 py-2 rounded-lg text-gray-700 focus:outline-none focus:border-white focus:ring-1 focus:ring-white"
+              placeholder="Search Theaters"
+              {...register("search")}
+            />
+          </div>
+        </div>
         {isFetchingCinemas ? (
           <Loading />
         ) : (
-          <div className="flex flex-wrap items-center gap-3">
-           
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {cinemas
+              .filter((cinema) =>
+                cinema.name
+                  .toLowerCase()
+                  .includes(watch("search")?.toLowerCase() || "")
+              )
+              .map((cinema, index) => (
+                <div
+                  className={`p-4 transition-shadow border rounded-lg hover:shadow-lg ${selectedCinemaIndex === index
+                    ? "border-pink-300"
+                    : "border-white"
+                    } bg-white`}
+                  onClick={() => setSelectedCinemaIndex(index)}
+                  key={cinema._id}
+                >
+                  <h3 className="text-lg font-bold text-gray-800">
+                    {cinema.name}
+                  </h3>
+                  <p className="text-sm text-gray-600">{cinema.location}</p>
+                </div>
+              ))}
           </div>
         )}
       </div>

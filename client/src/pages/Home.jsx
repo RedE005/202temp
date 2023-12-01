@@ -22,6 +22,7 @@ const Home = () => {
   const [isFetchingMoviesDone, setIsFetchingMoviesDone] = useState(false);
   const [showLocationModal, setshowLocationModal] = useState(true);
   const [ticketPrice, setTicketPrice] = useState(20);
+  const [locationModalOpen, setLocationModalOpen] = useState(false);
 
   const handleLocation = (location) => {
     updateLocation(location);
@@ -62,7 +63,6 @@ const Home = () => {
     }
   };
 
-
   const handleTicketPrice = async (e) => {
     e.preventDefault();
     const ticketId = "65699fbe95750e67ea00ea3d";
@@ -80,8 +80,8 @@ const Home = () => {
         }
       );
       console.log(response);
-  
-      toast.success("Ticket price configured to $"+ticketPrice, {
+
+      toast.success("Ticket price configured to $" + ticketPrice, {
         position: "top-center",
         autoClose: 2000,
         pauseOnHover: false,
@@ -102,7 +102,7 @@ const Home = () => {
     setSelectedMovieIndex,
     auth,
     isFetchingMoviesDone,
-    ticketPrice
+    ticketPrice,
   };
 
   const closeModal = () => {
@@ -118,34 +118,110 @@ const Home = () => {
           onRequestClose={closeModal}
           shouldCloseOnOverlayClick={false}
           contentLabel="Location Modal"
-          className="modal w-full max-w-lg overflow-y-auto fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white p-8 rounded-md z-90 border-4 border-solid border-gray-800"
+          style={{
+            overlay: {
+              backgroundColor: "rgba(0, 0, 0, 0.75)",
+              zIndex: "1000",
+            },
+            content: {
+              top: "50%",
+              left: "50%",
+              right: "auto",
+              bottom: "auto",
+              marginRight: "-50%",
+              transform: "translate(-50%, -50%)",
+              border: "1px solid #ccc",
+              background: "#fff",
+              overflow: "auto",
+              borderRadius: "4px",
+              outline: "none",
+              padding: "20px",
+              width: "fit-content",
+              minWidth: "300px",
+              maxHeight: "90vh",
+            },
+          }}
         >
-          <h2 className="text-2xl font-bold bg-white mb-4 p-4 rounded-t-md">
+          <h2
+            style={{
+              textAlign: "center",
+              fontWeight: "600",
+              marginBottom: "24px",
+            }}
+          >
             Select location:
           </h2>
-          <div className="flex flex-row gap-4 mb-4 py-4">
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              gap: "16px",
+              marginBottom: "24px",
+            }}
+          >
             <button
-              className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 flex-grow"
+              style={{
+                backgroundColor: "#ef4444",
+                color: "white",
+                padding: "12px 24px",
+                border: "none",
+                borderRadius: "4px",
+                cursor: "pointer",
+                fontWeight: "500",
+                fontSize: "1rem",
+              }}
               onClick={() => handleLocation("San Jose")}
             >
               San Jose
             </button>
             <button
-              className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 flex-grow"
+              style={{
+                backgroundColor: "#ef4444",
+                color: "white",
+                padding: "12px 24px",
+                border: "none",
+                borderRadius: "4px",
+                cursor: "pointer",
+                fontWeight: "500",
+                fontSize: "1rem",
+              }}
               onClick={() => handleLocation("Sunnyvale")}
             >
               Sunnyvale
             </button>
             <button
-              className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 flex-grow"
+              style={{
+                backgroundColor: "#ef4444",
+                color: "white",
+                padding: "12px 24px",
+                border: "none",
+                borderRadius: "4px",
+                cursor: "pointer",
+                fontWeight: "500",
+                fontSize: "1rem",
+              }}
               onClick={() => handleLocation("Fremont")}
             >
               Fremont
             </button>
           </div>
-          <div className="flex justify-end py-2">
+
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "flex-end",
+            }}
+          >
             <button
-              className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
+              style={{
+                backgroundColor: "#3b82f6",
+                color: "white",
+                padding: "12px 24px",
+                border: "none",
+                borderRadius: "4px",
+                cursor: "pointer",
+                fontWeight: "500",
+              }}
               onClick={closeModal}
             >
               Close

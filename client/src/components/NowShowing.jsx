@@ -28,7 +28,7 @@ const NowShowing = ({ movies, selectedMovieIndex, setSelectedMovieIndex, auth, i
   const posterWidth = window.innerWidth / 5; 
 
   return (
-    <div className="mx-4 flex flex-col bg-gradient-to-br from-green-200 to-green-200 p-4 text-gray-900 drop-shadow-md sm:mx-8 sm:p-6">
+    <div className="mx-4 flex flex-col  p-4 text-gray-900 drop-shadow-md sm:mx-8 sm:p-6">
       <h5 className="text-5xl items-center justify-center text-center font-bold">Now Showing</h5>
       {isFetchingMoviesDone ? (
         movies.length ? (
