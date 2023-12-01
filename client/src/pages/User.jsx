@@ -133,20 +133,20 @@ const User = () => {
 					className={`mt-2 grid max-h-[60vh] overflow-auto rounded-md bg-gradient-to-br from-indigo-200 to-red`}
 					style={{ gridTemplateColumns: 'repeat(3, minmax(max-content, 1fr)) max-content max-content' }}
 				>
-					<p className="sticky top-0 bg-gradient-to-br from-gray-800 to-gray-700 px-2 py-1 text-center text-2xl font-semibold text-white">
+					<p className="sticky top-0 bg-gradient-to-br from-gray-800 to-gray-700 px-2 py-1 text-left text-2xl font-semibold text-white">
 						Username
 					</p>
-					<p className="sticky top-0 bg-gradient-to-br from-gray-800 to-gray-700 px-2 py-1 text-center text-2xl font-semibold text-white">
+					<p className="sticky top-0 bg-gradient-to-br from-gray-800 to-gray-700 px-2 py-1 text-left text-2xl font-semibold text-white">
 						Email
 					</p>
 					
-					<p className="sticky top-0 bg-gradient-to-br from-gray-800 to-gray-700 px-2 py-1 text-center text-2xl font-bold text-white">
+					<p className="sticky top-0 bg-gradient-to-br from-gray-800 to-gray-700 px-2 py-1 text-left text-2xl font-bold text-white">
 						Role
 					</p>
-					<p className="sticky top-0 bg-gradient-to-br from-gray-800 to-gray-700 px-2 py-1 text-center text-2xl font-bold text-white">
+					<p className="sticky top-0 bg-gradient-to-br from-gray-800 to-gray-700 px-2 py-1 text-left text-2xl font-bold text-white">
 						Ticket
 					</p>
-					<p className="sticky top-0 bg-gradient-to-br from-gray-800 to-gray-700 px-2 py-1 text-center text-2xl font-bold text-white">
+					<p className="sticky top-0 bg-gradient-to-br from-gray-800 to-gray-700 px-2 py-1 text-left text-2xl font-bold text-white">
 						Action
 					</p>
 					{users

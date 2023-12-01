@@ -61,10 +61,10 @@ const Analytics = () => {
     const uniqueMovies = ['All', ...new Set(rawData.map(item => item.movie))];
 
     return (
-        <div className="flex min-h-screen flex-col gap-4 bg-gradient-to-br from-indigo-900 to-blue-500 pb-8 text-gray-900 sm:gap-8">
+        <div className="flex min-h-screen flex-col gap-4 bg-gradient-to-br from-red-900 to-blue-500 pb-8 text-gray-900 sm:gap-8">
             <Navbar />
-            <div className="mx-4 flex h-fit flex-col gap-4 rounded-md bg-gradient-to-br from-indigo-200 to-blue-100 p-4 drop-shadow-xl sm:mx-8 sm:p-6">
-                <h2 className="text-3xl font-bold text-gray-900">Theater Occupancy Analytics</h2>
+            <div className="mx-4 flex h-fit flex-col gap-4 rounded-md bg-gradient-to-br from-purple-100 to-blue-100 p-4 drop-shadow-xl sm:mx-8 sm:p-6">
+                <h2 className="text-3xl font-bold text-purple-900">Theater Occupancy Analytics</h2>
                 <div className="flex flex-col md:flex-row gap-4">
                     <div className="my-4 w-full">
                         <label htmlFor="period-select" className="block text-lg font-medium text-gray-700">Select Period:</label>

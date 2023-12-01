@@ -243,13 +243,13 @@ const Showtime = () => {
 										gridTemplateColumns: 'repeat(3, minmax(max-content, 1fr))'
 									}}
 								>
-									<p className="sticky top-0 bg-gradient-to-br from-gray-800 to-gray-700 px-2 py-1 text-center text-xl font-semibold text-white">
+									<p className="sticky top-0 bg-gradient-to-br from-gray-800 to-gray-700 px-2 py-1 text-left text-xl font-semibold text-white">
 										Seat
 									</p>
-									<p className="sticky top-0 bg-gradient-to-br from-gray-800 to-gray-700 px-2 py-1 text-center text-xl font-semibold text-white">
+									<p className="sticky top-0 bg-gradient-to-br from-gray-800 to-gray-700 px-2 py-1 text-left text-xl font-semibold text-white">
 										Username
 									</p>
-									<p className="sticky top-0 bg-gradient-to-br from-gray-800 to-gray-700 px-2 py-1 text-center text-xl font-semibold text-white">
+									<p className="sticky top-0 bg-gradient-to-br from-gray-800 to-gray-700 px-2 py-1 text-left text-xl font-semibold text-white">
 										Email
 									</p>
 									
@@ -286,9 +286,7 @@ const Showtime = () => {
 													<div className="border-t-2 border-indigo-200 px-2 py-1">
 														{seat.user.email}
 													</div>
-													<div className="border-t-2 border-indigo-200 px-2 py-1">
-														{seat.user.role}
-													</div>
+													
 												</Fragment>
 											)
 										})}
