@@ -33,7 +33,7 @@ app.use(mongoSanitize())
 app.use(helmet())
 app.use(xss())
 
-app.use('/auth', auth)
+app.use('/api/auth', auth)
 app.use('/cinema', cinema)
 app.use('/theater', theater)
 app.use('/movie', movie)
