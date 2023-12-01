@@ -22,7 +22,7 @@ const Register = () => {
 		const formData = { ...data, membership };
 		SetIsRegistering(true)
 		try {
-			const response = await axios.post('/api/auth/register', formData)
+			const response = await axios.post('/auth/register', formData)
 			
 			toast.success('Registration successful!', {
 				position: 'top-center',

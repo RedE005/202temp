@@ -456,7 +456,7 @@ exports.deleteTicket = async (req, res, next) => {
       userId,
       {
         $set: { tickets: ticketUpdates },
-        $inc: { rewardPoints: -rewardPointsToBeDeducted }
+        $inc: { rewardPoints: rewardPointsToBeDeducted }
       },
       { new: true }
     );
