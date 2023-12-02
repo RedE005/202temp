@@ -1,4 +1,4 @@
-# Reel Rover 
+# MovieTheater Club Application - Reel Rover 
 
 ## TEAM NAME - STRAWHATS
 
@@ -53,82 +53,63 @@ REACTJS, TAILWIND CSS, NODEJS, EXPRESSJS, MONGODB
 - **Communication** <br> Our team had good communication throughout the project. We brainstormed the idea of the project initially and divided the tasks among ourselves. We had frequent sprint meetings where we used to dicuss the issues faced by team members and retrospected what did not go well.
 
 ## Architecture Diagram
-
-![Screen Shot 2022-12-01 at 11.50.50 AM](https://i.imgur.com/kj1Upix.png)
-
-## Component Diagram
-
-![WhatsApp Image 2023-05-12 at 5 15 23 PM](https://github.com/gopinathsjsu/team-project-ysmp/assets/127645297/6bfe60b6-0506-4a16-8115-85a2a38f9752)
-
+![Architecture diagram.png](https://github.com/gopinathsjsu/teamproject-strawhats/blob/main/Images/Architecture%20diagram.png)
 
 ## Deployment Diagram
+![Component Diagram.jpeg](https://github.com/gopinathsjsu/teamproject-strawhats/blob/main/Images/Deployment%20diagram.png)
 
-![Deployment](https://i.imgur.com/A4qXnH5.png)
+## UML Diagram
+![Deployment diagram.png](https://github.com/gopinathsjsu/teamproject-strawhats/blob/main/Images/UML%20diagram.png)
+
+## Component Diagram
+![Component Diagram.jpeg](https://github.com/gopinathsjsu/teamproject-strawhats/blob/main/Images/Component%20Diagram.jpeg)
+
+# Feature Set
+
+### For all users:
+View Home/Landing page showing information about the Theaters, locations, current movie schedules, and upcoming movies,
+View membership option - Regular and Premium
+View Registration/Signup page - viewable by all users
+Book tickets for a movie
+Each booking will include an online service fee ($1.50 per ticket)
 
 
-# Feature set
+### For Enrolled and logged in Members:
+View members page - showing movie tickets purchased, rewards points accumulated
+Regular membership is free
+Premium membership is for an annual fee of 15 dollars
+View list of Movies watched in the past 30 days
+Book multiple seats (upto 8) for a movie show - using rewards points or payment method (pre-selected) - seats selected by the user
+Cancel previous tickets before showtime and request refund
+Accumulate rewards points (all members) 1 point per dollar
+Premium members get online service fee waived for any booking
 
-### Homepage
 
-- Should display the homepage with the information about the gym, available memberships and class types.
-- Should display login page on clicking login button
-- Should display register page on clicking the register button
-
-### Non Member View
-
-- Should display screen with information to enroll for membership 
-
-### Member View
-
-- Should be able to view  list of his class schedule for the next week.
-- Should be able to view his activities in the given time frame with respective to class and machine in terms of time spent and calories burnt.
-- Should be able to book available class in specific location from the list.
-- Should be able to log hours for the activity done the specific machine by giving start and end time.
-
-### Signin - Member
-
-- Member upon filling details should be able to sign in
-- Member are redirect to my classes page on successful login
-- Should display error in case of wrong credentiials.
-
-### Admin
-
-- Should be able to login successfully.
-- Should be able to enroll new users.
-- Should be able to check In / check Out specific user.
-- Should be able to give free trials to the users.
-- Should be able to view analytics dashboard
-
-### Analytics Dashboard
- -  Dashboard to display pie chart for number of members enrolled in specific location.
- -  Dashboard to display hours spent in gym in specific location for time frame of week and 30 days.
- -  Dashboard to display number of visitors for the gym on the specific day and location.
+### Theater employees :
+Add/update/remove movies/showtimes/theater assignment in the schedule
+Configure seating capacity for each theater in a multiplex
+View analytics dashboard showing Theater occupancy for the last 30/60/90 days
+Summarized by location
+Summarized by movies
+Configure discount prices for shows before 6pm and for Tuesday shows
 
 ## UI Wireframes
-![First Page-wf](https://github.com/gopinathsjsu/team-project-ysmp/assets/127645297/78d341a5-9d2e-48fd-bb39-1b17d913393c)
-![Register-wf](https://github.com/gopinathsjsu/team-project-ysmp/assets/127645297/401eca30-e63d-4cc6-8c82-ea7364798154)
-![Homepage-wf](https://github.com/gopinathsjsu/team-project-ysmp/assets/127645297/309d0779-ab85-4adb-9210-94661272dd87)
-![Non-Member page](https://github.com/gopinathsjsu/team-project-ysmp/assets/127645297/9fde0052-3adf-4782-a3f7-935cae59364c)
-![Member page(Myclasses)](https://github.com/gopinathsjsu/team-project-ysmp/assets/127645297/9449ec52-ed81-4030-86a0-91c330582dfa)
-![Member Page(view activities)](https://github.com/gopinathsjsu/team-project-ysmp/assets/127645297/02b218b8-a8fb-4246-818f-13f71bce1187)
-![member_loghours](https://github.com/gopinathsjsu/team-project-ysmp/assets/127645297/70610b9c-d073-40fc-9666-c35b2071fa3f)
-![Member page(Book class)](https://github.com/gopinathsjsu/team-project-ysmp/assets/127645297/b1a91c0b-e421-41cb-8ea3-5c67a4d64dd3) 
-![admin_checkin](https://github.com/gopinathsjsu/team-project-ysmp/assets/127645297/58b0aa0b-2f9e-4469-a2ec-3f5572b01995)
-![admin_enrollusers](https://github.com/gopinathsjsu/team-project-ysmp/assets/127645297/29e85051-5db0-42e0-9852-6700f5cb8770)
-![admin_freetrials](https://github.com/gopinathsjsu/team-project-ysmp/assets/127645297/5edae2ec-4dd2-496b-987e-d2f5334666dd)
-![dashboard-1](https://github.com/gopinathsjsu/team-project-ysmp/assets/127645297/3a7cdb91-5260-49b1-b41a-13640dced5f5)
-![dashboard-2](https://github.com/gopinathsjsu/team-project-ysmp/assets/127645297/0e035314-dd21-46f7-b96a-802a211e9f78)
-![dashboard-3](https://github.com/gopinathsjsu/team-project-ysmp/assets/127645297/3bacd3b1-d4f8-4e4d-878d-f934d0381df5)
+![Adding page.jpg](https://github.com/gopinathsjsu/teamproject-strawhats/blob/main/Web%20UI%20Raw%20Designs/Adding%20page.jpg)
+![Admin page UI.jpg](https://github.com/gopinathsjsu/teamproject-strawhats/blob/main/Web%20UI%20Raw%20Designs/Admin%20page%20UI.jpg)
+![Analytics page UI.jpg](https://github.com/gopinathsjsu/teamproject-strawhats/blob/main/Web%20UI%20Raw%20Designs/Analytics%20page%20UI.jpg))
+![Choosing a seat.jpg](https://github.com/gopinathsjsu/teamproject-strawhats/blob/main/Web%20UI%20Raw%20Designs/Choosing%20a%20seat.jpg)
+![Adding page.jpg](https://github.com/gopinathsjsu/teamproject-strawhats/blob/main/Web%20UI%20Raw%20Designs/Adding%20page.jpg)
+![Home Page UI.jpg](https://github.com/gopinathsjsu/teamproject-strawhats/blob/main/Web%20UI%20Raw%20Designs/Home%20Page%20UI.jpg)
+![Movie theatre and showtime.jpg](https://github.com/gopinathsjsu/teamproject-strawhats/blob/main/Web%20UI%20Raw%20Designs/Movie%20theatre%20and%20showtime.jpg)
+![Regsiter page web UI.jpg](https://github.com/gopinathsjsu/teamproject-strawhats/blob/main/Web%20UI%20Raw%20Designs/Regsiter%20page%20web%20UI.jpg)
+![Rewards page.jpg](https://github.com/gopinathsjsu/teamproject-strawhats/blob/main/Web%20UI%20Raw%20Designs/Rewards%20page.jpg)
 
 ## Sprint BurnDown Chart
-[Sprint BurnDown Chart](https://docs.google.com/spreadsheets/d/1u7J8boGu-aP9X6Baam-sD7kROVv2e1EMXlD0hC_OBE8/edit#gid=303579835)
-
-## Project Journal
-[Project Journal](https://docs.google.com/document/d/1SsX60HI1k-GzTQF-vC-i6G2Ip5XlY6zxNvhu_C6i96U/edit#heading=h.vi6tyc9zp40a)
+[Sprint Task Sheet and burndown strawhats.xlsx](https://github.com/gopinathsjsu/teamproject-strawhats/blob/main/Sprint%20Task%20Sheet%20and%20burndown%20strawhats.xlsx)
 
 ## Steps to run the application
 
-1. git clone [repo](https://github.com/gopinathsjsu/teamproject-strawhats)
+1. git clone [repo](https://github.com/gopinathsjsu/team-project-ysmp.git)
 2. Install dependencies for both frontend and backend npm install `npm install`
-3. Run backend - `npm start`
-   Run frontend - `npm run dev`
+3. Run backend - `npm run Devstart`
+   Run frontend - `npm run start`
