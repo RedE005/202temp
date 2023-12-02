@@ -6,7 +6,7 @@
 | --- | --- |
 | Shiva Ram Reddy Bethi |  017408482 |
 | Jatin Bhandari | 017425447 |
-| Charles Fathima Bhumpala |  |
+| Charles Fathima Bhumpala | 016773055 |
 | Sohan Leburu |  017408768 |
 
 
@@ -128,7 +128,7 @@ REACTJS, TAILWIND CSS, NODEJS, EXPRESSJS, MONGODB
 
 ## Steps to run the application
 
-1. git clone [repo](https://github.com/gopinathsjsu/team-project-ysmp.git)
+1. git clone [repo](https://github.com/gopinathsjsu/teamproject-strawhats)
 2. Install dependencies for both frontend and backend npm install `npm install`
-3. Run backend - `npm run Devstart`
-   Run frontend - `npm run start`
+3. Run backend - `npm start`
+   Run frontend - `npm run dev`
