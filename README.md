@@ -1,351 +1,134 @@
-<h1 align="center">Cinema-Booking</h1>
-
-Movie ticket booking web application with MERN stack (MongoDB, Express, React, NodeJS) & Tailwind CSS
+# Golds Gym 
 
-Demo: https://cinema-booking-client.vercel.app/
+## TEAM NAME - YSMP
 
-## Table of Contents
-* [Project Purpose](#project-purpose)
-* [Technologies](#technologies)
-* [Quick Tour](#quick-tour)
-* [Guide](#guide)
-* [How to run the app](#how-to-run-the-app)
+| TEAM | SJSU ID |
+| --- | --- |
+| Shiva Ram Reddy Bethi |  017408482 |
+| Jatin | 016566342 |
+| Charles | 016592654 |
+| Sohan |  016522883 |
 
-## Project Purpose
-The purpose of this project is to improve my full-stack web development skills, learning front-end technologies like React and Tailwind CSS, and backend technologies like Node.js, Express, and MongoDB.
 
-## Technologies
-* React v18.2.0
-* React Router Dom v6.14.2
-* React Hook Form v7.45.4
-* Tailwind CSS v3.3.3
-* Vite v4.4.8
-* NodeJS
-* Mongoose v7.4.2
-* Express v4.18.2
-* MongoDB
-* And more...
 
-## Quick Tour
-<h2 align="center">Home Page 🎥</h2>
-<p align="center">
-    <img src="./images/screenshot1.png" width="600">
-</p>
+## Team Members and Contribution gist:
 
-<h2 align="center">Responsive Design 📱</h2>
-<p align="center">
-    <img src="./images/screenshot2.png" width="180">
-</p>
+| TEAM | Contribution |
+| --- | --- |
+| Shiva |  Front end and Backend API implementation - log machine hours, Calory count calculation logic, Book class Page Implemented previous day, week, month logics for dashboards,admin dashboard to see the number of visitors, AWS deployment and Autoscaling AWS Deployment EC2 instances, loadbalancer |
+| Jatin | Scrum Master, Frontend and Backend API implementation - Login, register, home page, checkin/checkout Page, admin dashboard to see the numbers of hours spent spent by members in the gym, AWS deployment, Autoscaling and loadbalancer setup |
+| Charles | UI Implementation and backend implementation of Add classes, Non members page, free trials to non members, UI implementation for navigation, AWS deployment and Autoscaling |
+| Sohan | UI Implementation and backend API implementation of Members View Activity Page, getting activity hours api of past week pages along with Non members page, free trials|
 
-<h2 align="center">Cinema Page 🏢</h2>
-<p align="center">
-    <img src="./images/screenshot3.png" width="600">
-</p>
+## Tech stack
+REACTJS, BOOTSTRAP, NODEJS, EXPRESSJS, MONGODB
 
-<h2 align="center">View Schedule 🕙</h2>
-<p align="center">
-    <img src="./images/screenshot4.png" width="600">
-</p>
+## Design Choices:
 
-<h2 align="center">Book Seats 💺</h2>
-<p align="center">
-    <img src="./images/screenshot5.png" width="600">
-</p>
+### Why NoSQL in a database?
 
-<h2 align="center">View Tickets 🎫</h2>
-<p align="center">
-    <img src="./images/screenshot6.png" width="600">
-</p>
+- We chose NoSQL over a relational architecture because of its own access languages for interpreting data being stored.
+- It offers a developer-centric database, which simplifies database design and access to application programming interfaces.
+- Before employing databases, developers do not need to be concerned about their internal workings.
+- NoSQL databases allow you to work on what you need rather than pushing a schema on the database.
 
-<h2 align="center">Add a Movie 🍿</h2>
-<p align="center">
-    <img src="./images/screenshot7.png" width="600">
-</p>
+### Why is MongoDB used?
 
-<h2 align="center">Search Showtimes 🔎</h2>
-<p align="center">
-    <img src="./images/search2.png" width="600">
-</p>
+- MongoDB allows different data hierarchies. - Secondary indexes provide for flexibility in datamodel.
+- Because Mongo DB is schemaless, we do not define the schema at the outset.
 
-<h2 align="center">Manage Users 🕵️</h2>
-<p align="center">
-    <img src="./images/user1.png" width="600">
-</p>
+### Why MERN Stack - Performance and User Interface Rendering
 
-## Guide
+- React JS is the best when it comes to UI layer abstraction. Because React is only a library, you may build the application and structure the code anyway you like. As a consequence, in terms of UI rendering and performance, it exceeds Angular.
+- Cost-effective
+  Because MERN Stack uses only one language throughout, Javascript, a firm will benefit from hiring only Javascript experts rather than specialists for each technology. This choice will save you both time and money.
+- Open Source and Free
+  MERN employs only open-source technology. This feature allows a developer to use open sources to find answers to challenges that may emerge during development.
 
-### 🧩 Role / Feature
+## XP Core Values Maintained by Team
+- **Simplicity** <br> We made sure to include just the most straightforward solutions that worked. In order for everyone on the team to understand the code and make changes in the future, if necessary, we made it modular and reusable. As much as possible, we have reduced code smells and included pertinent comments to our code. Our code base is straightforward, making maintenance simple.
 
-There are 3 roles on this website with corresponding permissions:
+- **Feedback** <br> We were able to learn, adjust to the adjustments, and prevent repeating mistakes by providing and receiving regular feedback. This encouraged us to work more effectively. We made pull requests and submitted our changes to a branch during the development stage. We pushed the changes to the master branch after another team member gave the code their seal of approval. We ensured that any modifications to the master branch of the code were always stable and did not affect the code of the other team members. We were able to unify our objectives and duties thanks to ongoing feedback.
 
-| Role  | Permisson / Feature |
-|-------------|-------------|
-|👀 Viewer (Not logged in)  | **1. View released showtimes by choosing from** <br> &emsp;- Movie in home page <br>  &emsp;- Cinema's theater in cinema page <br> &emsp;- Cinema's schedule in schedule page <br> **2. View released showtimes for today and the future** <br> **3. View seats for released showtimes on the showtime page**|
-|👤 User   | **1. All Viewer permissions** <br> **2. Purchase tickets on the showtime page** <br> **3. View purchased tickets on the ticket page**|
-|👑 Admin   | **1. All User permissions** <br> **2. View all showtimes for any date** <br> **3. Manage cinemas** <br> **4. Manage theaters** <br> &emsp;- View theater's row, column, seats information <br> **5. Manage showtimes** <br> &emsp;- Search & filter & sort showtimes <br> &emsp;- View details of booked seats <br> **6. Manage movies** <br> **7. Manage user & admin**|
+- **Communication** <br> Our team had good communication throughout the project. We brainstormed the idea of the project initially and divided the tasks among ourselves. We had frequent sprint meetings where we used to dicuss the issues faced by team members and retrospected what did not go well.
 
-### 👀 Viewer
-Viewer have access to these pages for viewing released showtimes.
+## Architecture Diagram
 
-<details>
-    <summary>Home page</summary><br>
+![Screen Shot 2022-12-01 at 11.50.50 AM](https://i.imgur.com/kj1Upix.png)
 
-1. Select a movie
+## Component Diagram
 
-<img src="./images/home_viewer1.png" width="600">
+![WhatsApp Image 2023-05-12 at 5 15 23 PM](https://github.com/gopinathsjsu/team-project-ysmp/assets/127645297/6bfe60b6-0506-4a16-8115-85a2a38f9752)
 
-2. Select a date by either typing it into the input or selecting from the calendar to view showtimes 
 
-<img src="./images/home_viewer2.png" width="600">
+## Deployment Diagram
 
-3. Optionally, select a cinema to filter
+![Deployment](https://i.imgur.com/A4qXnH5.png)
 
-<img src="./images/home_viewer3.png" width="600">
 
-4. Click on a showtime to view seats
+# Feature set
 
-<img src="./images/home_viewer4.png" width="600">
+### Homepage
 
-</details>
+- Should display the homepage with the information about the gym, available memberships and class types.
+- Should display login page on clicking login button
+- Should display register page on clicking the register button
 
-<details>
-    <summary>Cinema page</summary><br>
+### Non Member View
 
-1. Select a cinema
+- Should display screen with information to enroll for membership 
 
-<img src="./images/cinema_viewer1.png" width="600">
+### Member View
 
-2. Select a date to view its theaters and showtimes
+- Should be able to view  list of his class schedule for the next week.
+- Should be able to view his activities in the given time frame with respective to class and machine in terms of time spent and calories burnt.
+- Should be able to book available class in specific location from the list.
+- Should be able to log hours for the activity done the specific machine by giving start and end time.
 
-<img src="./images/cinema_viewer2.png" width="600">
+### Signin - Member
 
-3. Click on a showtime to view seats
+- Member upon filling details should be able to sign in
+- Member are redirect to my classes page on successful login
+- Should display error in case of wrong credentiials.
 
-</details>
+### Admin
 
-<details>
-    <summary>Schedule page</summary><br>
+- Should be able to login successfully.
+- Should be able to enroll new users.
+- Should be able to check In / check Out specific user.
+- Should be able to give free trials to the users.
+- Should be able to view analytics dashboard
 
-1. Select a cinema
-
-<img src="./images/schedule_viewer1.png" width="600">
-
-2. Select a date to view its schedule for each theater
-
-<img src="./images/schedule_viewer2.png" width="600">
-
-3. Click on a showtime to view seats
-
-<img src="./images/schedule_viewer3.png" width="600">
-
-</details>
-
-<details>
-    <summary>Showtime page</summary><br>
-
-1. View available seats (white boxes) and unavailable seats (gray boxes)
-
-<img src="./images/showtime_viewer1.png" width="600">
-
-2. Viewer will be redirected to the login page if they click "Purchase"
-
-</details>
-
-### 👤 User
-User have all viewer permission. Including, the ability to purchase and view their own tickets
-
-<details>
-    <summary>Register / Login</summary><br>
-
-1. To create an user account, fill in a username, email, and password, then click "Register"
-
-<img src="./images/register1.png" width="600">
-
-2. To log in, fill in username and password, then click "Login"
-
-<img src="./images/login1.png" width="600">
-
-</details>
-
-<details>
-    <summary>Showtime page / Purchase tickets</summary><br>
-
-1. Select available seats 
-
-<img src="./images/showtime_user1.png" width="600">
-
-2. Click the "Purchase" button and confirm to purchase tickets
-
-<img src="./images/showtime_user2.png" width="600">
-
-</details>
-
-<details>
-    <summary>Ticket page</summary><br>
-
-1. View purchased tickets
-
-<img src="./images/ticket_user1.png" width="600">
-
-</details>
-
-### 👑 Admin
-Admin have all permission.
-
-<details>
-    <summary>Home page</summary><br>
-
-1. Admin can view theater's row, column, seats information.
-
-<img src="./images/home_admin1.png" width="600">
-
-2. Admin can view all showtimes for any date
-
-<img src="./images/home_admin2.png" width="600">
-
-</details>
-
-<details>
-    <summary>Cinema page</summary><br>
-
-<img src="./images/cinema_admin1.png" width="600"><br>
-
-**Add a new cinema**
-1. Type the cinema's name.
-
-<img src="./images/add_cinema1.png" width="600">
-
-2. Click the "Add" button
-
-<img src="./images/add_cinema2.png" width="600"><br>
-
-**Edit a cinema's name**
-1. Click the "Edit" button
-
-<img src="./images/edit_cinema1.png" width="600">
-
-2. Enter the new cinema name and click "Save"
-
-<img src="./images/edit_cinema2.png" width="600"><br>
-
-**Delete a cinema**
-1. Click the "Delete" button and confirm by clicking "OK"
-
-<img src="./images/delete_cinema1.png" width="600"><br>
-
-**Add a theater to the cinema**
-1. Fill the letter of the last row and the number of the last column seat, then click "Add"
-
-<img src="./images/add_theater1.png" width="600"><br>
-
-**Delete the last added theater**
-1. Click the "Delete" button at the bottom of the page
-
-<img src="./images/add_theater2.png" width="600"><br>
-
-**Add showtimes**
-1. Select a movie
-2. Fill in the following values:
-    * **Showtime:** Movie start time
-    * **Repeat:** For example, 1 means the showtime is added for today only, while 4  mean the showtime is added for today and the next 3 days.
-    * **Release now:** Check to release this showtime for viewers and users to view or book
-    
-    **Auto increase**
-    * **Showtime:** Check to automatically update the showtime value based on the ending time of this showtime, along with a specified gap. This is useful when adding consecutive movies, ensuring appropriate spacing between showtimes.
-    * **Date:** Check to enable automatic increase of showtime to the next day if it exceeds 24 hours
-    * **Gap:** The minimum duration between movie showtimes
-    
-    **Rounding**
-    * **5-min:** Round up the auto-increased showtime value to the nearest 5 minutes, e.g., 12:21 -> 12:25
-    * **10-min:** Round up the auto-increased showtime value to the nearest 10 minutes, e.g., 12:21 -> 12:30
-
-3.  Click the "Add" button
-
-<img src="./images/add_showtime1.png" width="600">
-
-4. The new showtimes will added to the theater. An eye-slash icon indicates that this showtime is not yet released
-
-<img src="./images/add_showtime2.png" width="600">
-
-</details>
-
-<details>
-    <summary>Schedule page</summary><br>
-
-<img src="./images/schedule_admin1.png" width="600">
-
-</details>
-
-
-<details>
-    <summary>Showtime page</summary><br>
-
-1. View details of booked seats
-2. Release, unrelease, or delete the showtime by clicking the button in the top-right corner
-
-<img src="./images/showtime_admin1.png" width="600">
-
-</details>
-
-<details>
-    <summary>Movie page</summary><br>
-
-<img src="./images/movie1.png" width="600"><br>
-
-**Add a movie**
-1. Fill in the movie name, URL of the poster, and the length in hours (optional) and minutes. Then, click "Add" to add the movie.
-
-<img src="./images/movie2.png" width="600"><br>
-
-**Delete a movie**
-
-1. Click the "Delete" button and confirm by clicking "OK"
-
-</details>
-
-<details>
-    <summary>Search page</summary><br>
-
-<img src="./images/search1.png" width="600">
-
-1. Filter & sort showtime and select to release / unreleased / delete them
-2. Click a "View" button to view seats
-
-<img src="./images/search2.png" width="600">
-
-</details>
-
-<details>
-    <summary>User page</summary><br>
-
-1. View usernames, email addresses, roles, and tickets of users.
-2. Click the "View Tickets" button to see a user's purchased tickets.
-3. Click the "Set Admin" or "Set User" button to change the user's role.
-4. Click the "Delete" button to delete the account.
-
-<img src="./images/user1.png" width="600">
-
-</details>
-
-## How to run the app
-1. Download the code
-2. Create .env file in /server
-```
-PORT=8080
-DATABASE=<your MongoDB connection string URI>
-JWT_SECRET=<any random JWT secret>
-JWT_EXPIRE=30d
-JWT_COOKIE_EXPIRE=30
-```
-3. Start server side
-```
-cd server
-npm install
-npm start
-```
-4. Start client side
-```
-cd client
-npm install
-npm run dev
-```
+### Analytics Dashboard
+ -  Dashboard to display pie chart for number of members enrolled in specific location.
+ -  Dashboard to display hours spent in gym in specific location for time frame of week and 30 days.
+ -  Dashboard to display number of visitors for the gym on the specific day and location.
+
+## UI Wireframes
+![First Page-wf](https://github.com/gopinathsjsu/team-project-ysmp/assets/127645297/78d341a5-9d2e-48fd-bb39-1b17d913393c)
+![Register-wf](https://github.com/gopinathsjsu/team-project-ysmp/assets/127645297/401eca30-e63d-4cc6-8c82-ea7364798154)
+![Homepage-wf](https://github.com/gopinathsjsu/team-project-ysmp/assets/127645297/309d0779-ab85-4adb-9210-94661272dd87)
+![Non-Member page](https://github.com/gopinathsjsu/team-project-ysmp/assets/127645297/9fde0052-3adf-4782-a3f7-935cae59364c)
+![Member page(Myclasses)](https://github.com/gopinathsjsu/team-project-ysmp/assets/127645297/9449ec52-ed81-4030-86a0-91c330582dfa)
+![Member Page(view activities)](https://github.com/gopinathsjsu/team-project-ysmp/assets/127645297/02b218b8-a8fb-4246-818f-13f71bce1187)
+![member_loghours](https://github.com/gopinathsjsu/team-project-ysmp/assets/127645297/70610b9c-d073-40fc-9666-c35b2071fa3f)
+![Member page(Book class)](https://github.com/gopinathsjsu/team-project-ysmp/assets/127645297/b1a91c0b-e421-41cb-8ea3-5c67a4d64dd3) 
+![admin_checkin](https://github.com/gopinathsjsu/team-project-ysmp/assets/127645297/58b0aa0b-2f9e-4469-a2ec-3f5572b01995)
+![admin_enrollusers](https://github.com/gopinathsjsu/team-project-ysmp/assets/127645297/29e85051-5db0-42e0-9852-6700f5cb8770)
+![admin_freetrials](https://github.com/gopinathsjsu/team-project-ysmp/assets/127645297/5edae2ec-4dd2-496b-987e-d2f5334666dd)
+![dashboard-1](https://github.com/gopinathsjsu/team-project-ysmp/assets/127645297/3a7cdb91-5260-49b1-b41a-13640dced5f5)
+![dashboard-2](https://github.com/gopinathsjsu/team-project-ysmp/assets/127645297/0e035314-dd21-46f7-b96a-802a211e9f78)
+![dashboard-3](https://github.com/gopinathsjsu/team-project-ysmp/assets/127645297/3bacd3b1-d4f8-4e4d-878d-f934d0381df5)
+
+## Sprint BurnDown Chart
+[Sprint BurnDown Chart](https://docs.google.com/spreadsheets/d/1u7J8boGu-aP9X6Baam-sD7kROVv2e1EMXlD0hC_OBE8/edit#gid=303579835)
+
+## Project Journal
+[Project Journal](https://docs.google.com/document/d/1SsX60HI1k-GzTQF-vC-i6G2Ip5XlY6zxNvhu_C6i96U/edit#heading=h.vi6tyc9zp40a)
+
+## Steps to run the application
+
+1. git clone [repo](https://github.com/gopinathsjsu/team-project-ysmp.git)
+2. Install dependencies for both frontend and backend npm install `npm install`
+3. Run backend - `npm run Devstart`
+   Run frontend - `npm run start`
