@@ -112,7 +112,7 @@ const User = () => {
 	}
 
 	return (
-		<div className="flex min-h-screen flex-col gap-4 bg-gradient-to-br from-indigo-900 to-red-500 pb-8 text-gray-700 sm:gap-8">
+		<div className="flex min-h-screen flex-col gap-4 bg-gradient-to-br from-indigo-800 to-red-500 pb-8 text-gray-700 sm:gap-8">
 			<Navbar />
 			<div className="mx-4 flex h-fit flex-col gap-4 rounded-lg bg-gradient-to-br from-purple-900 to-blue-100 p-6 drop-shadow-2xl sm:mx-8 sm:p-6">
 				
