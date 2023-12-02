@@ -1,13 +1,13 @@
-# Golds Gym 
+# Reel Rover 
 
-## TEAM NAME - YSMP
+## TEAM NAME - STRAWHATS
 
 | TEAM | SJSU ID |
 | --- | --- |
 | Shiva Ram Reddy Bethi |  017408482 |
-| Jatin | 016566342 |
-| Charles | 016592654 |
-| Sohan |  016522883 |
+| Jatin Bhandari | 017425447 |
+| Charles Fathima Bhumpala |  |
+| Sohan Leburu |  017408768 |
 
 
 
@@ -15,13 +15,13 @@
 
 | TEAM | Contribution |
 | --- | --- |
-| Shiva |  Front end and Backend API implementation - log machine hours, Calory count calculation logic, Book class Page Implemented previous day, week, month logics for dashboards,admin dashboard to see the number of visitors, AWS deployment and Autoscaling AWS Deployment EC2 instances, loadbalancer |
-| Jatin | Scrum Master, Frontend and Backend API implementation - Login, register, home page, checkin/checkout Page, admin dashboard to see the numbers of hours spent spent by members in the gym, AWS deployment, Autoscaling and loadbalancer setup |
-| Charles | UI Implementation and backend implementation of Add classes, Non members page, free trials to non members, UI implementation for navigation, AWS deployment and Autoscaling |
-| Sohan | UI Implementation and backend API implementation of Members View Activity Page, getting activity hours api of past week pages along with Non members page, free trials|
+| Shiva Ram Reddy Bethi |  Front end and Backend API implementation - Designed and configured MongoDB models, cinemaController logic, worked on cinema route module,worked on Admin Route for client logic, Designed and worked on Home, Register, Purchase front-end client webpages, developed Navbar, TheatreListByMovie, CinemaLists, DateSelector React Components, loadbalancer |
+| Jatin Bhandari | Front end and Backend API implementation -  authController & theaterController logic, worked on auth route & theater module, Designed and worked on Tickets, Analytics, Login front-end client webpages, developed MovieLists, NowShowing, ShowtimeDetails, Showtimes React Components, AWS deployment and Autoscaling AWS Deployment EC2 instances |
+| Charles Fathima Bhumpala | Front end and Backend API implementation - movieController logic, worked on movie route module, Developed Location Context, Designed and worked on Movie, Showtime, Cinema front-end client webpages, developed Theater, TheaterListsByCinema, TheaterShort, UpcomingMovies React Components |
+| Sohan Leburu | Front end and Backend API implementation - showtimeController logic, worked on showtime route module,Developed Auth Context, Designed and worked on Schedule, Search, User front-end client webpages, developed SelectedMovie, Seat, ScheduleTable, Loading React Components, Black box Testing |
 
 ## Tech stack
-REACTJS, BOOTSTRAP, NODEJS, EXPRESSJS, MONGODB
+REACTJS, TAILWIND CSS, NODEJS, EXPRESSJS, MONGODB
 
 ## Design Choices:
 
